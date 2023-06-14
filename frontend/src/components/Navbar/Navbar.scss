@@ -1,11 +1,10 @@
 @import "../../assets/scss/variables";
 
 .navmain {
-  padding: 4px;
+  margin-bottom: 50px;
+  padding: 18px 0;
   background-color: $color-white !important;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 20px 50px rgba(0, 151, 255, 0.1);
   .nav-logo {
     margin-right: 20px;
     img {
@@ -18,8 +17,8 @@
     .navbar-nav {
       .nav-link {
         font-family: $font-main;
-        font-size: 14px;
-        padding: 5px 10px;
+        font-size: 17px;
+        padding: 5px 13px;
         transition: ease-in-out 0.3s;
         &.active {
           a {
@@ -30,10 +29,10 @@
         }
         a {
           font-weight: 500;
+          font-size: 17px;
           color: $color-black;
           text-decoration: none;
           transition: ease-in-out 0.3s;
-          color: #404040;
           &:hover {
             color: $color-blue;
           }
@@ -53,12 +52,13 @@
           font-weight: 500;
           color: $color-black;
           text-decoration: none;
-          color: #404040;
           &::after {
             display: none;
           }
           svg {
             margin-left: 4px;
+            font-size: 12px;
+            margin-bottom: 3px;
           }
         }
         .dropdown-menu {
@@ -93,8 +93,7 @@
       align-items: center;
       .nav-link {
         padding-left: 0;
-        padding-right: 20px;
-        color: $color-blue;
+        padding-right: 25px;
       }
       .profile-dropdown-menu {
         height: 28px;

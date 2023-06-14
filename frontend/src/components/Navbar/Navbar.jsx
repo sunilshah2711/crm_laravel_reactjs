@@ -2,32 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown, Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
-import { faBullhorn, faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { GoogleLogout } from "react-google-login";
-import { useNavigate, useParams } from "react-router-dom";
-
+import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.scss";
-
 import Logo from "../../assets/images/logo.png";
+import speaker from "../../assets/images/navbar/speaker.svg";
+import notification from "../../assets/images/navbar/notification.svg";
+import setting from "../../assets/images/navbar/setting.svg";
 
 // Navigation bar design
 
 const Navigation = () => {
-  const { workspaceid } = useParams();
-  const navigate = useNavigate();
-  const onSignoutSuccess = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
-
-  const onSignoutFail = (res) => {
-    console.log(res);
-  };
+  
   return (
     <>
       <Navbar bg="light" expand="lg" className="navmain">
-        <Container fluid>
+        <Container>
           <Navbar.Brand className="nav-logo">
             <Link to="/">
               <img src={Logo} alt="logo" />
@@ -42,13 +31,13 @@ const Navigation = () => {
               activeKey="/"
             >
               <Nav.Link as="li" eventKey="/">
-                <Link to={`/${workspaceid}/contacts`}>Contacts</Link>
+                <Link to='1'>Contacts</Link>
               </Nav.Link>
               <NavDropdown
                 title={[
                   <span key="drop1">
                     Sales
-                    <FontAwesomeIcon icon={faAngleDown} />
+                    <FontAwesomeIcon icon={faSortDown} />
                   </span>,
                 ]}
                 className="nav-dropdown"
@@ -57,12 +46,13 @@ const Navigation = () => {
                 <NavDropdown.Item as="li">Quotes</NavDropdown.Item>
                 <NavDropdown.Item as="li">Cadences</NavDropdown.Item>
                 <NavDropdown.Item as="li">Meeting Links</NavDropdown.Item>
+                <NavDropdown.Item as="li">Products</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown
                 title={[
                   <span key="drop2">
                     Marketing
-                    <FontAwesomeIcon icon={faAngleDown} />
+                    <FontAwesomeIcon icon={faSortDown} />
                   </span>,
                 ]}
                 className="nav-dropdown"
@@ -78,28 +68,31 @@ const Navigation = () => {
                 title={[
                   <span key="drop3">
                     Projects
-                    <FontAwesomeIcon icon={faAngleDown} />
+                    <FontAwesomeIcon icon={faSortDown} />
                   </span>,
                 ]}
                 className="nav-dropdown"
               >
                 <NavDropdown.Item as="li">
-                  <Link to={`/${workspaceid}/projects`}>Projects</Link>
+                  <Link to="/">Projects</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item as="li">Tasks</NavDropdown.Item>
                 <NavDropdown.Item as="li">Filters</NavDropdown.Item>
                 <NavDropdown.Item as="li">Labels</NavDropdown.Item>
               </NavDropdown>
               <Nav.Link as="li" eventKey="chat-with-support">
-                <Link to="/">Check-ins</Link>
+                <Link to="/">Chat with Supports</Link>
               </Nav.Link>
             </Nav>
             <div className="nav-right-bar">
               <Nav.Link>
-                <FontAwesomeIcon icon={faBullhorn} />
+                <img src={speaker} alt="speaker"/>
               </Nav.Link>
               <Nav.Link>
-                <FontAwesomeIcon icon={faBell} />
+                <img src={notification} alt="notification"/>
+              </Nav.Link>
+              <Nav.Link>
+                <img src={setting} alt="setting"/>
               </Nav.Link>
               <Dropdown align="end" className="profile-dropdown-menu">
                 <Dropdown.Toggle>
@@ -110,20 +103,7 @@ const Navigation = () => {
                   <Dropdown.Item>Admin</Dropdown.Item>
                   <Dropdown.Item>Switch Workspace</Dropdown.Item>
                   <Dropdown.Item>Recycle Bin</Dropdown.Item>
-                  <GoogleLogout
-                    clientId="966211017574-14b3bp0n0nqrcm4u1k4o0i2h6753qvn6.apps.googleusercontent.com"
-                    onLogoutSuccess={onSignoutSuccess}
-                    onFailure={onSignoutFail}
-                    redirectUri="https://dev.podamium.com"
-                    render={(renderProps) => (
-                      <Dropdown.Item
-                        onClick={renderProps.onClick}
-                        disabled={renderProps.disabled}
-                      >
-                        Log Out
-                      </Dropdown.Item>
-                    )}
-                  />
+                  <Dropdown.Item>Log Out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>

@@ -1,0 +1,64 @@
+@import "../../assets//scss/variables";
+
+
+
+
+.right-sidebar{
+    width: 80%;
+    .contact-table{
+        thead{
+            tr{
+                border-bottom:2px solid rgba(0, 82, 204, 0.3);
+                th{
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #000000;
+                    padding: 15px 10px;
+                    opacity: 0.5;
+                    span{
+                        display: flex;
+                        align-items: center;
+                        input{
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+                }
+            }
+        }
+        tbody{
+            tr{
+                border-bottom:2px solid rgba(0, 82, 204, 0.3);
+                td{
+                    font-weight: 400;
+                    font-size: 13px;
+                    color: #000000;
+                    padding: 15px 10px;
+                    span{
+                        display: flex;
+                        align-items: center;
+                        input{
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.contactcount{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    .contact-total{
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        color: $color-blue;
+
+    }
+}

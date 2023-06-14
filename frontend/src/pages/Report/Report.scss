@@ -1,0 +1,92 @@
+@import "../../assets//scss/variables";
+
+.report-main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    .reportadd{
+        cursor: pointer;
+        padding: 8px 12px;
+        background: #E6EEFA;
+        border-radius: 6px;
+        svg{
+            color: $color-blue;
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+.report-table{
+    margin: 0;
+    thead{
+        tr{
+            border-bottom:2px solid rgba(0, 82, 204, 0.3);
+            th{
+                font-weight: 600;
+                font-size: 14px;
+                color: #000000;
+                padding: 15px 10px;
+            }
+        }
+    }
+    tbody{
+        tr{
+            border-bottom:2px solid rgba(0, 82, 204, 0.3);
+            td{
+                font-weight: 400;
+                font-size: 13px;
+                color: #1F1F1F;
+                padding: 15px 10px;
+                .action-report{
+                    span{
+                        margin-right: 25px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pagination-block{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top:40px;
+    .pagination-entery{
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: #000000;
+    }
+    .pagination-steping{
+        display: flex;
+        align-items: center;
+        .pagination-Previous{
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: 400;
+            font-size: 17px;
+        }
+        .stepstyle{
+            padding:9px 17px;
+            cursor: pointer;
+            margin: 0 10px;
+            font-weight: 400;
+            font-size: 17px;
+            color: #0052CC;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 82, 204, 0.3);
+            transition:all 0.5s;
+            &:hover{
+                background-color: $color-blue;
+                color: $color-white;
+            }
+        }
+        .pagination-next{
+            margin-right: 0;
+        }
+    }
+}
+
