@@ -5,6 +5,7 @@ import tag from "../../assets/images/reportdetail/tag.svg";
 import dot from "../../assets/images/reportdetail/dot.svg";
 import leftarrow from "../../assets/images/reportdetail/leftarrow.svg";
 import rightarrow from "../../assets/images/reportdetail/rightarrow.svg";
+import call from "../../assets/images/reportdetail/call.svg";
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
@@ -99,15 +100,105 @@ const ReportDetails = () =>{
                         </Col>
                         <Col sm={10} className='detailtab-block'>
                             <Tab.Content className='detailtab-content'>
-                                <Tab.Pane eventKey="related_list">
+                                <Tab.Pane eventKey="related_list" className="detailtab-fadcontent">
                                     <Tabs
                                     defaultActiveKey="overview"
                                     id="justify-tab-example"
                                     className="detailtab-panel"
                                     justify
                                     >
-                                        <Tab className='' eventKey="overview" title="Overview">
-                                            Tab content for Home
+                                        <Tab className='detailtab-fade' eventKey="overview" title="Overview">
+                                            <div className='detailtab-inner-block'>
+                                                <div className='detailtab-inner-content'>
+                                                    <div className='detail-information'>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Contact Owner</p>
+                                                            <p className='information-data'>Jemish Malaviya</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Email</p>
+                                                            <p className='information-data'>
+                                                                <a href='/'>leota-dilliard@hotmail.com</a>
+                                                            </p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Phone</p>
+                                                            <p className='information-data'><span><img src={call} alt='call'/></span>555-555-5555</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Mobile</p>
+                                                            <p className='information-data'><span><img src={call} alt='call'/></span>555-555-5555</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Department</p>
+                                                            <p className='information-data'>Management</p>  
+                                                        </div>
+                                                    </div>        
+                                                </div>
+                                            </div>
+                                            <div className='detailtab-inner-block'>
+                                                <div className='detailtab-hometitle'>
+                                                    Next Action
+                                                </div>
+                                                <div className='detailtab-approval'>
+                                                    <div className='detailtab-approvalcontent'>
+                                                        <p className='approvalcontent-date'>FEB 3</p>
+                                                        <p className='approvalcontent-desc'>Get Approval from Manager</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='detailtab-inner-block'>
+                                                <div className='detailtab-inner-content'>
+                                                    <div className='detail-information'>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Contact Owner</p>
+                                                            <p className='information-data'>Jemish Malaviya</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Email</p>
+                                                            <p className='information-data'>
+                                                                <a href='/'>leota-dilliard@hotmail.com</a>
+                                                            </p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Phone</p>
+                                                            <p className='information-data'><span><img src={call} alt='call'/></span>555-555-5555</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Mobile</p>
+                                                            <p className='information-data'><span><img src={call} alt='call'/></span>555-555-5555</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Department</p>
+                                                            <p className='information-data'>Management</p>  
+                                                        </div>
+                                                    </div> 
+                                                    <div className='detail-information'>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Contact Owner</p>
+                                                            <p className='information-data'>Jemish Malaviya</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Email</p>
+                                                            <p className='information-data'>
+                                                                <a href='/'>leota-dilliard@hotmail.com</a>
+                                                            </p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Phone</p>
+                                                            <p className='information-data'><span><img src={call} alt='call'/></span>555-555-5555</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Mobile</p>
+                                                            <p className='information-data'><span><img src={call} alt='call'/></span>555-555-5555</p>  
+                                                        </div>
+                                                        <div className='detail-information-data'>
+                                                            <p className='information-title'>Department</p>
+                                                            <p className='information-data'>Management</p>  
+                                                        </div>
+                                                    </div>        
+                                                </div>
+                                            </div>
                                         </Tab>
                                         <Tab className='' eventKey="timeline" title="Timeline">
                                             Tab content for Profile
