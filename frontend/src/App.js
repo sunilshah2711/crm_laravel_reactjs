@@ -4,6 +4,7 @@ import Workplace from "./pages/Workplace/Workplace";
 import Contact from "./pages/Contact/Contact";
 import Report from "./pages/Report/Report";
 import ReportDetails from "./pages/ReportDetails/ReportDetails";
+import Notification from "./pages/Notification/Notification";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/report" element={<Report/>} />
         <Route path="/reportdetails" element={<ReportDetails/>} />
+        <Route path="/notification" element={<Notification/>} />
      </Routes>
     </>
   );
