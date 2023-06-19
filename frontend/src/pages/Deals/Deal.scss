@@ -1,0 +1,70 @@
+@import "../../assets//scss/variables";
+
+.deal-sidebar{
+    .deal-table{
+        thead{
+            tr{
+                th{
+                    font-size: 10px;
+                    font-weight: 600;
+                    color: rgba($color-black,0.5);
+                    span{
+                        input{
+                            width: 15px;
+                            height: 15px;
+                        }
+                    }
+                }
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    font-size: 10px;
+                    font-weight: 400;
+                    color: $color-black;
+                    .deal-table-checkbox{
+                        display: flex;
+                        align-items: center;
+                        .checkbox-deal{
+                            margin-right: 25px;
+                            display: flex;
+                            input{
+                                width: 15px;
+                                height: 15px;
+                            }
+                        }
+                        .deal-date-block{
+                            display: flex;
+                            align-items: center;
+                            .deal-trueimg{
+                                
+                            }
+                            .deal-date{
+                                margin-left: 10px;
+                                position: relative;
+                                font-weight: 400;
+                                color: $color-white;
+                                background-color: #0052cc;
+                                padding: 4px 20px 4px 6px;
+                                border-radius: 30px;
+                                font-size: 8px;
+                                &:after{
+                                    position: absolute;
+                                    content: "";
+                                    right: 0;
+                                    top: -7px;
+                                    width: 0;
+                                    height: 0;
+                                    border-top: 16px solid transparent;
+                                    border-right: 16px solid #ffffff;
+                                    border-bottom: 16px solid transparent;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

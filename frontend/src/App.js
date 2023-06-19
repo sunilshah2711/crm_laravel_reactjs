@@ -5,6 +5,7 @@ import Contact from "./pages/Contact/Contact";
 import Report from "./pages/Report/Report";
 import ReportDetails from "./pages/ReportDetails/ReportDetails";
 import Notification from "./pages/Notification/Notification";
+import Deals from "./pages/Deals/Deals";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/report" element={<Report/>} />
         <Route path="/reportdetails" element={<ReportDetails/>} />
         <Route path="/notification" element={<Notification/>} />
+        <Route path="/deal" element={<Deals/>} />
      </Routes>
     </>
   );
