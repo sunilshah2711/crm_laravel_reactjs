@@ -6,6 +6,8 @@ import Report from "./pages/Report/Report";
 import ReportDetails from "./pages/ReportDetails/ReportDetails";
 import Notification from "./pages/Notification/Notification";
 import Deals from "./pages/Deals/Deals";
+import Quote from "./pages/Quote/Quote";
+import CreateQuote from "./pages/CreateQuote/CreateQuote";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/reportdetails" element={<ReportDetails/>} />
         <Route path="/notification" element={<Notification/>} />
         <Route path="/deal" element={<Deals/>} />
+        <Route path="/quote" element={<Quote/>} />
+        <Route path="/createquote" element={<CreateQuote/>} />
      </Routes>
     </>
   );
