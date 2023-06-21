@@ -23,14 +23,14 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route
+        {/* <Route
           path={"/contact"}
           element={
             <RequireAuth loginPath={"/login"}>
               <Contact />
             </RequireAuth>
           }
-        />
+        /> */}
 
 
 
@@ -38,6 +38,7 @@ function App() {
 
 
 
+        <Route path="/contact" element={<Contact/>} />
         <Route path="/workplace" element={<Workplace/>} />
         <Route path="/report" element={<Report/>} />
         <Route path="/reportdetails" element={<ReportDetails/>} />
