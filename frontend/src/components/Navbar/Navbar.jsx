@@ -8,11 +8,19 @@ import Logo from "../../assets/images/logo.png";
 import speaker from "../../assets/images/navbar/speaker.svg";
 import notification from "../../assets/images/navbar/notification.svg";
 import setting from "../../assets/images/navbar/setting.svg";
-
+import { useSignOut } from "react-auth-kit";
+import { useNavigate } from "react-router-dom";
 // Navigation bar design
 
 const Navigation = () => {
-  
+  const signOut = useSignOut();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    signOut();
+    navigate("/login");
+  };  
+
   return (
     <>
       <Navbar bg="light" expand="lg" className="navmain">
@@ -31,7 +39,7 @@ const Navigation = () => {
               activeKey="/"
             >
               <Nav.Link as="li" eventKey="/">
-                <Link to='1'>Contacts</Link>
+                <Link to="1">Contacts</Link>
               </Nav.Link>
               <NavDropdown
                 title={[
@@ -86,13 +94,13 @@ const Navigation = () => {
             </Nav>
             <div className="nav-right-bar">
               <Nav.Link>
-                <img src={speaker} alt="speaker"/>
+                <img src={speaker} alt="speaker" />
               </Nav.Link>
               <Nav.Link>
-                <img src={notification} alt="notification"/>
+                <img src={notification} alt="notification" />
               </Nav.Link>
               <Nav.Link>
-                <img src={setting} alt="setting"/>
+                <img src={setting} alt="setting" />
               </Nav.Link>
               <Dropdown align="end" className="profile-dropdown-menu">
                 <Dropdown.Toggle>
@@ -103,7 +111,9 @@ const Navigation = () => {
                   <Dropdown.Item>Admin</Dropdown.Item>
                   <Dropdown.Item>Switch Workspace</Dropdown.Item>
                   <Dropdown.Item>Recycle Bin</Dropdown.Item>
-                  <Dropdown.Item>Log Out</Dropdown.Item>
+                  <Dropdown.Item onClick={() => logout()}>
+                    Log Out
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
