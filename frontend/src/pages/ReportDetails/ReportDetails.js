@@ -502,8 +502,8 @@ const ReportDetails = () =>{
                                             <div className='detailtab-detailblock detailtab-note'>
                                                 <div className='detailtab-smalltitle'>
                                                     Emails
-                                                    <div class="detailtab-dropdown">
-                                                        <button class="btn-deal">
+                                                    <div className="detailtab-dropdown">
+                                                        <button className="btn-deal">
                                                         Compose Email
                                                         </button>
                                                     </div>

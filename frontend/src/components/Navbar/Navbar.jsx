@@ -50,11 +50,11 @@ const Navigation = () => {
                 ]}
                 className="nav-dropdown"
               >
-                <NavDropdown.Item as="li">Deals</NavDropdown.Item>
-                <NavDropdown.Item as="li">Quotes</NavDropdown.Item>
-                <NavDropdown.Item as="li">Cadences</NavDropdown.Item>
-                <NavDropdown.Item as="li">Meeting Links</NavDropdown.Item>
-                <NavDropdown.Item as="li">Products</NavDropdown.Item>
+                <NavDropdown.Item href="/deal" as="a">Deals</NavDropdown.Item>
+                <NavDropdown.Item as="a">Quotes</NavDropdown.Item>
+                <NavDropdown.Item as="a">Cadences</NavDropdown.Item>
+                <NavDropdown.Item as="a">Meeting Links</NavDropdown.Item>
+                <NavDropdown.Item as="a">Products</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown
                 title={[

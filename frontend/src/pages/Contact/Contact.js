@@ -8,12 +8,11 @@ import SidebarTop from "../../components/SidebarTop/SidebarTop";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
 import editbutton from "../../assets/images/contact/editbutton.svg";
 import axios from "axios";
 // import { useAuthHeader } from "react-auth-kit";
-import ModelContact from "../../components/ModelContact/ModelContact";
 
 const Contact = () => {
   const [users, setUsers] = useState([]);
@@ -25,6 +24,11 @@ const Contact = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
+
+  const [open, setOpen] = useState(false);
+
+  const eventClose = () => setOpen(false);
+  const eventShow = () => setOpen(true);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +89,7 @@ const Contact = () => {
   // }, []);
 
   useEffect(() => {
-    console.log(`/contact`);
+    // console.log(`/contact`);
     setLoading(true);
     instance
       .get(`/tblHbDEIYCS0QvvZk`)
@@ -98,6 +102,19 @@ const Contact = () => {
         console.log(error);
       });
   }, []);
+
+  const refreshData = () => {
+    instance
+      .get(`/tblHbDEIYCS0QvvZk`)
+      .then(function (response) {
+        console.log(response);
+        setUsers(response.data.records);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const [contact, setContact] = useState({
     id: "",
@@ -171,19 +188,100 @@ const Contact = () => {
         no_progress_updates_last_7_days: 1,
         no_progress_updates_last_30_days: 1,
         close_date_this_month: 0,
-      }
+      },
     };
 
     instance
       .patch(`/tblHbDEIYCS0QvvZk/${contact.id}`, data)
       .then((res) => {
         console.log(res);
+        refreshData();
         alert("Record Updated Successfully");
-    setShow(false);
+        setShow(false);
       })
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  const [filed, setFiled] = useState({
+    full_name: "",
+    name: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    mobile: "",
+    Lead_Source: "",
+    Referral_Code: "",
+  });
+
+  const eventInput = (e) => {
+    setFiled({ ...filed, [e.target.name]: e.target.value });
+  };
+
+  const saveContact = (e) => {
+    if (filed.full_name !== "" && filed.name !== "" && filed.first_name !== "" && filed.last_name !== "" && filed.email !== "" && filed.mobile !== "" && filed.Lead_Source !== "" && filed.Referral_Code !== ""){
+      const data = {
+        records: [
+          {
+            fields: {
+              id: 49,
+              full_name: filed.full_name,
+              name: filed.name,
+              first_name: filed.first_name,
+              last_name: filed.last_name,
+              email: filed.email,
+              mobile: filed.mobile,
+              Lead_Source: filed.Lead_Source,
+              Referral_Code: filed.Referral_Code,
+              created_at: "2023-06-16 07:24:36",
+              updated_at: "2023-06-16 07:24:36",
+              master_record_id: "NULL",
+              account_id: "NULL",
+              deleted: 0,
+              solutation: "NULL",
+              other_street: 0,
+              unassigned: 1,
+              unread: 1,
+              unchanged: 1,
+              no_next_activity: 0,
+              no_activity_all_time: 0,
+              no_activity_last_7_days: 0,
+              no_activity_last_30_days: 1,
+              some_activity_last_7_days: 1,
+              some_activity_last_30_days: 0,
+              no_progress_updates_last_7_days: 1,
+              no_progress_updates_last_30_days: 1,
+              close_date_this_month: 0,
+            },
+          },
+        ],
+      };
+
+
+      const instance = axios.create({
+        baseURL: "https://api.airtable.com/v0/appvPiKRd6ZGQKUJA",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          // Authorization: authHeader(),
+          Authorization:
+            "Bearer patPRk7YOL27aUjHU.25298c18dd166d6e856ddfa98fccd95d19d46bd21b042ca99dd9856df79cbb7a",
+          // "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+      });
+
+      instance
+        .post(`/tblHbDEIYCS0QvvZk`, data)
+        .then((res) => {
+          refreshData();
+          alert("Record Added Successfully");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }else{
+        alert("Please fill all fields")
+    }
   };
 
   return (
@@ -194,7 +292,9 @@ const Contact = () => {
           <SidebarTop />
           <div className="contact-model-block">
             <div className="contact-total">Total : 1</div>
-            <ModelContact />
+            <Button variant="primary" onClick={eventShow} className="me-2">
+              Add Contact
+            </Button>
           </div>
         </div>
         <div className="row">
@@ -544,11 +644,12 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+
+      <Offcanvas show={show} onHide={handleClose} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Update Contact</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Full Name</Form.Label>
@@ -639,16 +740,114 @@ const Contact = () => {
               />
             </Form.Group>
           </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={() => updateContact()}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={() => updateContact()}>
+              Save Changes
+            </Button>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
+
+      <Offcanvas show={open} onHide={eventClose} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Add Contact</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="full_name"
+                placeholder="Full Name"
+                onChange={eventInput}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                onChange={eventInput}
+                placeholder="Name"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
+                name="first_name"
+                type="text"
+                onChange={eventInput}
+                placeholder="First Name"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="last_name"
+                onChange={eventInput}
+                placeholder="Last Name"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                onChange={eventInput}
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Mobile</Form.Label>
+              <Form.Control
+                type="number"
+                name="mobile"
+                onChange={eventInput}
+                placeholder="Mobile"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Lead Source</Form.Label>
+              <Form.Control
+                type="text"
+                name="Lead_Source"
+                onChange={eventInput}
+                placeholder="Lead Source"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Referral Code</Form.Label>
+              <Form.Control
+                type="text"
+                name="Referral_Code"
+                onChange={eventInput}
+                placeholder="Referral Code"
+                autoFocus
+              />
+            </Form.Group>
+          </Form>
+          <div style={{display:"flex",justifyContent:"space-between"}}>
+            <Button variant="secondary" onClick={eventClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={() => saveContact()}>
+              Save Changes
+            </Button>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 };
