@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Auth from './pages/Auth/Auth';
+import Auth from "./pages/Auth/Auth";
 import Workplace from "./pages/Workplace/Workplace";
 import { RequireAuth } from "react-auth-kit";
 import Contact from "./pages/Contact/Contact";
@@ -9,11 +9,12 @@ import Notification from "./pages/Notification/Notification";
 import Deals from "./pages/Deals/Deals";
 import Quote from "./pages/Quote/Quote";
 import CreateQuote from "./pages/CreateQuote/CreateQuote";
+import Table from "./components/Tabel/Tabel";
 
 function App() {
   return (
     <>
-     <Routes>
+      <Routes>
         <Route path="/login" element={<Auth />} />
         <Route
           path={"/workplace"}
@@ -31,15 +32,16 @@ function App() {
             </RequireAuth>
           }
         /> */}
-        <Route path="/contact" element={<Contact/>} />
-        <Route path="/workplace" element={<Workplace/>} />
-        <Route path="/report" element={<Report/>} />
-        <Route path="/reportdetails" element={<ReportDetails/>} />
-        <Route path="/notification" element={<Notification/>} />
-        <Route path="/deal" element={<Deals/>} />
-        <Route path="/quote" element={<Quote/>} />
-        <Route path="/createquote" element={<CreateQuote/>} />
-     </Routes>
+        <Route path="/tabel" element={<Table />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/workplace" element={<Workplace />} />
+        <Route path="/report" element={<Report />} />
+        <Route path="/reportdetails" element={<ReportDetails />} />
+        <Route path="/notification" element={<Notification />} />
+        <Route path="/deal" element={<Deals />} />
+        <Route path="/quote" element={<Quote />} />
+        <Route path="/createquote" element={<CreateQuote />} />
+      </Routes>
     </>
   );
 }
