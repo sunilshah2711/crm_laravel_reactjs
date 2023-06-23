@@ -31,13 +31,6 @@ function App() {
             </RequireAuth>
           }
         /> */}
-
-
-
-
-
-
-
         <Route path="/contact" element={<Contact/>} />
         <Route path="/workplace" element={<Workplace/>} />
         <Route path="/report" element={<Report/>} />
