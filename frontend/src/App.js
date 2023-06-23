@@ -9,7 +9,7 @@ import Notification from "./pages/Notification/Notification";
 import Deals from "./pages/Deals/Deals";
 import Quote from "./pages/Quote/Quote";
 import CreateQuote from "./pages/CreateQuote/CreateQuote";
-import Table from "./components/Tabel/Tabel";
+import Table from "./pages/Tabel/Tabel";
 
 function App() {
   return (

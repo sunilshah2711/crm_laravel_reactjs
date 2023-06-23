@@ -150,6 +150,36 @@ const Table = () => {
     <DndProvider backend={HTML5Backend}>
       <div className="p-2">
         <div className="h-4" />
+        <div className="inline-block border border-black shadow rounded">
+          <div className="px-1 border-b border-black">
+            <label>
+              <input
+                {...{
+                  type: "checkbox",
+                  checked: table.getIsAllColumnsVisible(),
+                  onChange: table.getToggleAllColumnsVisibilityHandler(),
+                }}
+              />{" "}
+              Toggle All
+            </label>
+          </div>
+          {table.getAllLeafColumns().map((column) => {
+            return (
+              <div key={column.id} className="px-1">
+                <label>
+                  <input
+                    {...{
+                      type: "checkbox",
+                      checked: column.getIsVisible(),
+                      onChange: column.getToggleVisibilityHandler(),
+                    }}
+                  />{" "}
+                  {column.id}
+                </label>
+              </div>
+            );
+          })}
+        </div> 
         <div className="flex flex-wrap gap-2">
           <button onClick={() => regenerateData()} className="border p-1">
             Regenerate
