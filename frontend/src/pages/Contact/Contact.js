@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Contact.scss";
 // import Sidebar from "../../components/Sidebar/Sidebar";
@@ -11,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
 import editbutton from "../../assets/images/contact/editbutton.svg";
+import TanTable from "../../components/Tabel/Tabel";
 import axios from "axios";
 // import { useAuthHeader } from "react-auth-kit";
 
@@ -19,7 +19,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   // const authHeader = useAuthHeader();
 
-  const [FilterData, setFilterData] = useState({});
+  const [FilterData, setFilterData] = useState(["unassigned"]);
 
   const [show, setShow] = useState(false);
 
@@ -29,14 +29,6 @@ const Contact = () => {
 
   const eventClose = () => setOpen(false);
   const eventShow = () => setOpen(true);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFilterData({
-      ...FilterData,
-      [name]: value,
-    });
-  };
 
   // Serialize the object into query parameters
   const serializedParams = Object.entries(FilterData)
@@ -71,8 +63,6 @@ const Contact = () => {
         console.log(error);
       });
   };
-
-  console.log(FilterData);
 
   // useEffect(() => {
   //   console.log(`/contact`);
@@ -219,8 +209,79 @@ const Contact = () => {
     setFiled({ ...filed, [e.target.name]: e.target.value });
   };
 
+  const defaultColumns = [
+    {
+      accessorKey: "name",
+      id: "name",
+      header: "Name",
+    },
+    {
+      accessorKey: "full_name",
+      id: "full_name",
+      header: "Full Name",
+    },
+    {
+      accessorKey: "first_name",
+      id: "first_name",
+      header: "First Name",
+    },
+    {
+      accessorKey: "last_name",
+      id: "last_name",
+      header: "Last Name",
+    },
+    {
+      accessorKey: "email",
+      id: "email",
+      header: "Email",
+    },
+    {
+      accessorKey: "mobile",
+      id: "mobile",
+      header: "Mobile",
+    },
+    {
+      accessorKey: "Lead_Source",
+      id: "Lead_Source",
+      header: "Lead Source",
+    },
+    {
+      accessorKey: "Referral_Code",
+      id: "Referral_Code",
+      header: "Referral Code",
+    },
+    {
+      accessorKey: "action",
+      id: "action",
+      header: "Action",
+      cell: (value) => {
+        return (
+          <div className="action-report">
+            <Button
+              variant="primary"
+              onClick={() => getIdByButton(value.row.original.id)}
+            >
+              <span>
+                <img src={editbutton} alt="editbutton" />
+              </span>
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
+
   const saveContact = (e) => {
-    if (filed.full_name !== "" && filed.name !== "" && filed.first_name !== "" && filed.last_name !== "" && filed.email !== "" && filed.mobile !== "" && filed.Lead_Source !== "" && filed.Referral_Code !== ""){
+    if (
+      filed.full_name !== "" &&
+      filed.name !== "" &&
+      filed.first_name !== "" &&
+      filed.last_name !== "" &&
+      filed.email !== "" &&
+      filed.mobile !== "" &&
+      filed.Lead_Source !== "" &&
+      filed.Referral_Code !== ""
+    ) {
       const data = {
         records: [
           {
@@ -258,7 +319,6 @@ const Contact = () => {
         ],
       };
 
-
       const instance = axios.create({
         baseURL: "https://api.airtable.com/v0/appvPiKRd6ZGQKUJA",
         headers: {
@@ -279,9 +339,59 @@ const Contact = () => {
         .catch(function (error) {
           console.log(error);
         });
-    }else{
-        alert("Please fill all fields")
+    } else {
+      alert("Please fill all fields");
     }
+  };
+
+  function moveFieldsOutside(records) {
+    const newRecords = [];
+    for (const record of records) {
+      const { id, fields } = record;
+      const { ...otherFields } = fields;
+      otherFields.id = id;
+      newRecords.push({ id, ...otherFields });
+    }
+    return newRecords;
+  }
+
+  console.log(users);
+
+  const newData = moveFieldsOutside(users);
+
+  console.log("new", newData);
+
+  const [filteredRecords, setFilteredRecords] = useState([]);
+  const [filterKeys, setFilterKeys] = useState([]);
+
+  const handleInputChange = (event) => {
+    const key = event.target.name;
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      setFilterKeys((prevKeys) => [...prevKeys, key]);
+    } else {
+      setFilterKeys((prevKeys) => prevKeys.filter((k) => k !== key));
+    }
+  };
+
+  const handleRunButtonClick = () => {
+    const filteredData = newData.filter((record) => {
+      return filterKeys.every((key) => record[key] === 1);
+    });
+
+    setFilteredRecords(filteredData);
+  };
+
+  const handleResetButtonClick = () => {
+    setFilteredRecords([]);
+    setFilterKeys([]);
+
+    // Uncheck all checkboxes
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
   };
 
   return (
@@ -576,13 +686,56 @@ const Contact = () => {
                 </div>
               </Tab>
               <Tab eventKey="columns" title="Columns">
-                Tab content for Loooonger Tab
+              <div className="filter-inner">
+                  <p className="filter-title">Contact Properties</p>
+                  <div className="ProjectFilter">
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Last Name" />
+                      <p>Last Name</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Contact ID" />
+                      <p>Contact ID</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Deleted" />
+                      <p>Deleted</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Master Record ID" />
+                      <p>Master Record ID</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Account ID" />
+                      <p>Account ID</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="First Name" />
+                      <p>First Name</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Solutation" />
+                      <p>Solutation</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Full Name" />
+                      <p>Full Name</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Other Street" />
+                      <p>Other Street</p>
+                    </div>
+                    <div className="projectfiltercheckbox">
+                      <input type="checkbox" name="Other" />
+                      <p>Other</p>
+                    </div>
+                  </div>
+                </div>
               </Tab>
             </Tabs>
             <div className="projectFilter_filtersbutton">
-              <button onClick={runFilter}>Run</button>
-              <button>Save</button>
-              <button>Save As</button>
+              <button onClick={handleRunButtonClick}>Run</button>
+              <button onClick={handleResetButtonClick}>Reset</button>
             </div>
           </div>
           <div className="col-9 right-sidebar">
@@ -590,55 +743,12 @@ const Contact = () => {
               <div>Loading...</div>
             ) : (
               <>
-                <Table className="contact-table">
-                  <thead>
-                    <tr>
-                      <th>
-                        <span>
-                          <input type="checkbox" className="checkbox" />
-                        </span>
-                      </th>
-                      <th>Full Name</th>
-                      <th>Name</th>
-                      <th>Last Name</th>
-                      <th>Email</th>
-                      <th>Mobile</th>
-                      <th>Lead Source</th>
-                      <th>Referral Code</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users.map((user) => (
-                      <tr key={user.id}>
-                        <td>
-                          <span>
-                            <input type="checkbox" className="checkbox" />
-                          </span>
-                        </td>
-                        <td>{user.fields.full_name}</td>
-                        <td>{user.fields.name}</td>
-                        <td>{user.fields.last_name}</td>
-                        <td>{user.fields.email}</td>
-                        <td>{user.fields.mobile}</td>
-                        <td>{user.fields.Lead_Source}</td>
-                        <td>{user.fields.Referral_Code}</td>
-                        <td>
-                          <div className="action-report">
-                            <Button
-                              variant="primary"
-                              onClick={() => getIdByButton(user.id)}
-                            >
-                              <span>
-                                <img src={editbutton} alt="editbutton" />
-                              </span>
-                            </Button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                <TanTable
+                  tableData={
+                    filteredRecords.length > 0 ? filteredRecords : newData
+                  }
+                  tableColumn={defaultColumns}
+                />
               </>
             )}
           </div>
@@ -838,7 +948,7 @@ const Contact = () => {
               />
             </Form.Group>
           </Form>
-          <div style={{display:"flex",justifyContent:"space-between"}}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button variant="secondary" onClick={eventClose}>
               Close
             </Button>
