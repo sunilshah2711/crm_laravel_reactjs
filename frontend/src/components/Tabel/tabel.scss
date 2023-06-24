@@ -1,41 +1,81 @@
-table {
-  border: 1px solid lightgray;
-}
+  .contact-table{
+      thead{
+          tr{
+              border-bottom:2px solid rgba(0, 82, 204, 0.3);
+              th{
+                padding: 15px 10px;
+                cursor: pointer;
+                &:hover{
+                  .table-heading-block{
+                    button{
+                      opacity: 1;
+                    }
+                  }
+                }
+                  .table-heading-block{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    .table-heading-inner-block{
+                      display: flex;
+                      align-items: center;
+                      gap: 5px;
+                      span{
+                        font-weight: 600;
+                        font-size: 14px;
+                        color: #000000;
+                        opacity: 0.5;
+                      }
+                    }
+                    button{
+                      padding: 0;
+                      color: #000000;
+                      opacity: 0.5;
+                      border: none;
+                      background-color: transparent;
+                      opacity: 0;
+                      transition: all 0.5s;
+                    }
+                  }
+                  span{
+                      display: flex;
+                      align-items: center;
+                      input{
+                          height: 20px;
+                          width: 20px;
+                      }
+                  }
+              }
+          }
+      }
+      tbody{
+          tr{
+              border-bottom:2px solid rgba(0, 82, 204, 0.3);
+              td{
+                  font-weight: 400;
+                  font-size: 13px;
+                  color: #000000;
+                  padding: 15px 10px;
+                  span{
+                      display: flex;
+                      align-items: center;
+                      input{
+                          height: 20px;
+                          width: 20px;
+                      }
+                  }
+                  .action-report{
+                      span{
+                          img{
+                              cursor: pointer;
+                              width: 15px;
+                              height: 15px;
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
 
-tbody {
-  border-bottom: 1px solid lightgray;
-}
-
-th {
-  border-bottom: 1px solid lightgray;
-  border-right: 1px solid lightgray;
-  padding: 2px 4px;
-}
-
-th div {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-}
-
-th button {
-  padding: 1rem;
-  cursor: grab;
-}
-
-td {
-  border-right: 1px solid lightgray;
-  padding: 2px 4px;
-}
-
-td:last-child {
-  border-right: 0;
-}
-
-tfoot {
-  color: gray;
-}
-
-tfoot th {
-  font-weight: normal;
-}

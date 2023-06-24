@@ -1,4 +1,11 @@
 import React from "react";
+import Table from "react-bootstrap/Table";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCaretDown,
+  faCaretUp,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 import "./tabel.scss";
 
 import {
@@ -18,39 +25,33 @@ const defaultColumns = [
     id: "firstName",
     header: "First Name",
     cell: (info) => info.getValue(),
-    footer: (props) => props.column.id,
   },
   {
     accessorFn: (row) => row.lastName,
     id: "lastName",
     cell: (info) => info.getValue(),
-    header: () => <span>Last Name</span>,
-    footer: (props) => props.column.id,
+    header: () => "Last Name",
   },
   {
     accessorKey: "age",
     id: "age",
     header: "Age",
-    footer: (props) => props.column.id,
   },
 
   {
     accessorKey: "visits",
     id: "visits",
     header: "Visits",
-    footer: (props) => props.column.id,
   },
   {
     accessorKey: "status",
     id: "status",
     header: "Status",
-    footer: (props) => props.column.id,
   },
   {
     accessorKey: "progress",
     id: "progress",
     header: "Profile Progress",
-    footer: (props) => props.column.id,
   },
 ];
 
@@ -98,25 +99,31 @@ const DraggableColumnHeader = ({ header, table }) => {
         ref={previewRef}
         {...{
           className: header.column.getCanSort()
-            ? "cursor-pointer select-none"
+            ? "cursor-pointer table-heading-block select-none"
             : "",
           onClick: header.column.getToggleSortingHandler(),
         }}
       >
-        {header.isPlaceholder
-          ? null
-          : flexRender(header.column.columnDef.header, header.getContext())}
-        {{
-          asc: " 🔼",
-          desc: " 🔽",
-        }[header.column.getIsSorted()] ?? null}
-        <button ref={dragRef}>🟰</button>
+        <div className="table-heading-inner-block">
+          <span>
+            {header.isPlaceholder
+              ? null
+              : flexRender(header.column.columnDef.header, header.getContext())}
+          </span>
+          {{
+            asc: <FontAwesomeIcon icon={faCaretUp} />,
+            desc: <FontAwesomeIcon icon={faCaretDown} />,
+          }[header.column.getIsSorted()] ?? null}
+        </div>
+        <button ref={dragRef}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
       </div>
     </th>
   );
 };
 
-const Table = () => {
+const Tables = () => {
   const [data, setData] = React.useState(() => makeData(20));
   const [columns] = React.useState(() => [...defaultColumns]);
   const [sorting, setSorting] = React.useState([]);
@@ -125,10 +132,6 @@ const Table = () => {
     //must start out with populated columnOrder so we can splice
     columns.map((column) => column.id)
   );
-
-  const regenerateData = () => setData(() => makeData(20));
-
-  const resetOrder = () => setColumnOrder(columns.map((column) => column.id));
 
   const table = useReactTable({
     data,
@@ -179,17 +182,9 @@ const Table = () => {
               </div>
             );
           })}
-        </div> 
-        <div className="flex flex-wrap gap-2">
-          <button onClick={() => regenerateData()} className="border p-1">
-            Regenerate
-          </button>
-          <button onClick={() => resetOrder()} className="border p-1">
-            Reset Order
-          </button>
         </div>
         <div className="h-4" />
-        <table>
+        <Table className="contact-table">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -214,26 +209,10 @@ const Table = () => {
               </tr>
             ))}
           </tbody>
-          <tfoot>
-            {table.getFooterGroups().map((footerGroup) => (
-              <tr key={footerGroup.id}>
-                {footerGroup.headers.map((header) => (
-                  <th key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.footer,
-                          header.getContext()
-                        )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </tfoot>
-        </table>
+        </Table>
       </div>
     </DndProvider>
   );
 };
 
-export default Table;
+export default Tables;
