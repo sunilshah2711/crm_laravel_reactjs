@@ -11,10 +11,11 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
 import editbutton from "../../assets/images/contact/editbutton.svg";
 import TanTable from "../../components/Tabel/Tabel";
+import TableColumn from "../../components/Tabel/TableColumn";
 import axios from "axios";
 // import { useAuthHeader } from "react-auth-kit";
 
-const Contact = () => {
+const Contact = ({ table }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   // const authHeader = useAuthHeader();
@@ -84,7 +85,7 @@ const Contact = () => {
     instance
       .get(`/tblHbDEIYCS0QvvZk`)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         setUsers(response.data.records);
         setLoading(false);
       })
@@ -355,11 +356,11 @@ const Contact = () => {
     return newRecords;
   }
 
-  console.log(users);
+  // console.log(users);
 
   const newData = moveFieldsOutside(users);
 
-  console.log("new", newData);
+  // console.log("new", newData);
 
   const [filteredRecords, setFilteredRecords] = useState([]);
   const [filterKeys, setFilterKeys] = useState([]);
@@ -393,6 +394,18 @@ const Contact = () => {
       checkbox.checked = false;
     });
   };
+
+  const [colData, setColData] = useState("");
+  const [colRefatch, setColRefatch] = useState(false);
+
+  // console.log("colData", colData);
+  useEffect(() => {
+    if (colRefatch === true) {
+      setColRefatch(false);
+    } else {
+      setColRefatch(true);
+    }
+  }, [colData, colRefatch]);
 
   return (
     <>
@@ -543,99 +556,11 @@ const Contact = () => {
                 </div>
                 <div className="filter-inner">
                   <p className="filter-title">Contact Properties</p>
-                  <div className="ProjectFilter">
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="first_name"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>First Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="last_name"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Last Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="Contact ID"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Contact ID</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="deleted"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Deleted</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="master_record_id"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Master Record ID</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="account_id"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Account ID</p>
-                    </div>
-
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="solutation"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Solutation</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="full_name"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Full Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="other_street"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Other Street</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input
-                        type="checkbox"
-                        name="Other"
-                        onChange={handleInputChange}
-                        value="1"
-                      />
-                      <p>Other</p>
-                    </div>
-                  </div>
+                  {colData && <TableColumn table={colData} />}
+                </div>
+                <div className="projectFilter_filtersbutton">
+                  <button onClick={handleRunButtonClick}>Run</button>
+                  <button onClick={handleResetButtonClick}>Reset</button>
                 </div>
               </Tab>
               <Tab eventKey="groups" title="Groups">
@@ -686,57 +611,13 @@ const Contact = () => {
                 </div>
               </Tab>
               <Tab eventKey="columns" title="Columns">
-              <div className="filter-inner">
+                <div className="filter-inner">
                   <p className="filter-title">Contact Properties</p>
-                  <div className="ProjectFilter">
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Last Name" />
-                      <p>Last Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Contact ID" />
-                      <p>Contact ID</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Deleted" />
-                      <p>Deleted</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Master Record ID" />
-                      <p>Master Record ID</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Account ID" />
-                      <p>Account ID</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="First Name" />
-                      <p>First Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Solutation" />
-                      <p>Solutation</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Full Name" />
-                      <p>Full Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Other Street" />
-                      <p>Other Street</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Other" />
-                      <p>Other</p>
-                    </div>
-                  </div>
+                  {colData && <TableColumn table={colData} />}
                 </div>
               </Tab>
             </Tabs>
-            <div className="projectFilter_filtersbutton">
-              <button onClick={handleRunButtonClick}>Run</button>
-              <button onClick={handleResetButtonClick}>Reset</button>
-            </div>
+            
           </div>
           <div className="col-9 right-sidebar">
             {loading ? (
@@ -748,6 +629,8 @@ const Contact = () => {
                     filteredRecords.length > 0 ? filteredRecords : newData
                   }
                   tableColumn={defaultColumns}
+                  tableCol={(e) => setColData(e)}
+                  reftechCol={colRefatch}
                 />
               </>
             )}
