@@ -13,6 +13,8 @@ import {
   getCoreRowModel,
   useReactTable,
   getSortedRowModel,
+  getFilteredRowModel,
+  getExpandedRowModel,
 } from "@tanstack/react-table";
 
 import { DndProvider, useDrag, useDrop } from "react-dnd";
@@ -91,6 +93,8 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
   const [columns] = useState(() => [...tableColumn]);
   const [sorting, setSorting] = useState([]);
 
+  // const rerender = useReducer(() => ({}), {})[1]
+
   useEffect(() => {
     setData(tableData);
   }, [tableData]);
@@ -100,17 +104,24 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
     columns.map((column) => column.id)
   );
 
+  const [expanded, setExpanded] = useState({});
+
   const table = useReactTable({
     data,
     columns,
     state: {
       columnOrder,
       sorting,
+      expanded,
     },
     onColumnOrderChange: setColumnOrder,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getSubRows: (row) => row.subRows,
+    getFilteredRowModel: getFilteredRowModel(),
+    getExpandedRowModonExpandedChange: setExpanded,
+    el: getExpandedRowModel(),
     debugTable: true,
     debugHeaders: true,
     debugColumns: true,
@@ -121,7 +132,8 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
   }, [table, tableCol, reftechCol]);
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <>
+      <DndProvider backend={HTML5Backend}>
         <Table className="contact-table">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -155,7 +167,10 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
             })}
           </tbody>
         </Table>
-    </DndProvider>
+      </DndProvider>
+
+      
+    </>
   );
 };
 

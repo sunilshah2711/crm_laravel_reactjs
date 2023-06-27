@@ -12,6 +12,7 @@ import Form from "react-bootstrap/Form";
 import editbutton from "../../assets/images/contact/editbutton.svg";
 import TanTable from "../../components/Tabel/Tabel";
 import TableColumn from "../../components/Tabel/TableColumn";
+import TableDemo from "../../components/TableDemo/TableDemo";
 import axios from "axios";
 // import { useAuthHeader } from "react-auth-kit";
 
@@ -407,6 +408,14 @@ const Contact = ({ table }) => {
     }
   }, [colData, colRefatch]);
 
+  const [datasearch, setDatasearch] = useState();
+
+  const groupevent = (e) => {
+    setDatasearch(e.target.value);
+    console.log("hnhjdswndjh",datasearch);
+  }
+
+
   return (
     <>
       <Navbar />
@@ -567,46 +576,48 @@ const Contact = ({ table }) => {
                 <div className="filter-inner">
                   <p className="filter-title">Contact Properties</p>
                   <div className="ProjectFilter">
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Last Name" />
-                      <p>Last Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Contact ID" />
-                      <p>Contact ID</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Deleted" />
-                      <p>Deleted</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Master Record ID" />
-                      <p>Master Record ID</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Account ID" />
-                      <p>Account ID</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="First Name" />
-                      <p>First Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Solutation" />
-                      <p>Solutation</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Full Name" />
-                      <p>Full Name</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Other Street" />
-                      <p>Other Street</p>
-                    </div>
-                    <div className="projectfiltercheckbox">
-                      <input type="checkbox" name="Other" />
-                      <p>Other</p>
-                    </div>
+                    <form>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent} name="groupby" value="Last Name" />
+                        <p>Last Name</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent} name="groupby" value="Contact ID" />
+                        <p>Contact ID</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent} name="groupby" value="Deleted" />
+                        <p>Deleted</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent} name="groupby" value="Master Record ID" />
+                        <p>Master Record ID</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent} name="groupby" value="Account ID" />
+                        <p>Account ID</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent} name="groupby" value="First Name" />
+                        <p>First Name</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent}  name="groupby" value="Solutation" />
+                        <p>Solutation</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent} name="groupby" value="Full Name" />
+                        <p>Full Name</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent} name="groupby" value="Other Street" />
+                        <p>Other Street</p>
+                      </div>
+                      <div className="projectfiltercheckbox">
+                        <input type="radio" onChange={groupevent}  name="groupby" value="Other" />
+                        <p>Other</p>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </Tab>
@@ -620,6 +631,7 @@ const Contact = ({ table }) => {
             
           </div>
           <div className="col-9 right-sidebar">
+          <TableDemo/>
             {loading ? (
               <div>Loading...</div>
             ) : (

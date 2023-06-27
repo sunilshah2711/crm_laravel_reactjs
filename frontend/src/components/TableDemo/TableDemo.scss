@@ -1,0 +1,47 @@
+.demotable{
+    .table{
+        tbody{
+            tr{
+                border-top: 0;
+                border-bottom: 1px solid #dee2e6;
+                td{
+                    padding:0 8px;
+                    border: 0;
+                }
+            }
+        }
+    }
+    .accordion{
+        border: none;
+        padding: 0;
+        box-shadow: none;
+        .accordion-item{
+            box-shadow: none;
+            border: none;
+        }
+        .accordion-header{
+            button{
+                padding:12px 0;
+            border: none;
+            background-color: transparent;
+            }
+        }
+        .accordion-collapse{
+            border: none;
+            .accordion-body{
+                padding: 0;
+            }
+            .table{
+                margin: 0;
+                border: none;
+                tr{
+                    border-top: 0;
+                    border-bottom: 1px solid #000;
+                    td{
+                    border: 0;
+                    }
+                }
+            }
+        }
+    }
+}
