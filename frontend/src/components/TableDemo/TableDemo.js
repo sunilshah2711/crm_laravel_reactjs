@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Table from "react-bootstrap/Table";
-import Accordion from "react-bootstrap/Accordion";
+// import Accordion from "react-bootstrap/Accordion";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import "./TableDemo.scss";
 const TableColumn = () => {

@@ -106,6 +106,8 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
 
   const [expanded, setExpanded] = useState({});
 
+  // console.log(tableColumn);
+
   const table = useReactTable({
     data,
     columns,
@@ -121,22 +123,31 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
     getSubRows: (row) => row.subRows,
     getFilteredRowModel: getFilteredRowModel(),
     getExpandedRowModonExpandedChange: setExpanded,
-    el: getExpandedRowModel(),
-    debugTable: true,
-    debugHeaders: true,
-    debugColumns: true,
+    onExpandedChange: setExpanded,
+    getExpandedRowModel: getExpandedRowModel(),
   });
 
   useEffect(() => {
     tableCol(table);
   }, [table, tableCol, reftechCol]);
 
+  const [mastHed, setMasthed] = useState([]);
+
+  useEffect(() => {
+    setMasthed(table.getHeaderGroups());
+    console.log("inside tabel.js 138", table.getHeaderGroups());
+  }, [table, tableColumn]);
+
+  console.log("inside tabel js data from contact 139", tableColumn);
+  console.log("inside tabel js 140", mastHed);
+
   return (
     <>
+      {/* <span>{mastHed}</span> */}
       <DndProvider backend={HTML5Backend}>
         <Table className="contact-table">
           <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {mastHed.map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <DraggableColumnHeader
@@ -168,8 +179,6 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
           </tbody>
         </Table>
       </DndProvider>
-
-      
     </>
   );
 };

@@ -1,5 +1,6 @@
 .demotable{
     .table{
+        margin-bottom: 0;
         tbody{
             tr{
                 border-top: 0;
@@ -23,6 +24,7 @@
             button{
                 padding:12px 0;
             border: none;
+            box-shadow: none;
             background-color: transparent;
             }
         }
@@ -36,9 +38,12 @@
                 border: none;
                 tr{
                     border-top: 0;
-                    border-bottom: 1px solid #000;
+                    border-bottom: 1px solid #dee2e6;
                     td{
                     border: 0;
+                    }
+                    &:last-child{
+                        border-bottom: none;
                     }
                 }
             }

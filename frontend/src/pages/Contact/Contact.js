@@ -12,7 +12,7 @@ import Form from "react-bootstrap/Form";
 import editbutton from "../../assets/images/contact/editbutton.svg";
 import TanTable from "../../components/Tabel/Tabel";
 import TableColumn from "../../components/Tabel/TableColumn";
-import TableDemo from "../../components/TableDemo/TableDemo";
+// import TableDemo from "../../components/TableDemo/TableDemo";
 import axios from "axios";
 // import { useAuthHeader } from "react-auth-kit";
 
@@ -32,15 +32,6 @@ const Contact = ({ table }) => {
   const eventClose = () => setOpen(false);
   const eventShow = () => setOpen(true);
 
-  // Serialize the object into query parameters
-  const serializedParams = Object.entries(FilterData)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    )
-    .join("&");
-  // console.log(authHeader());
-
   const instance = axios.create({
     baseURL: "https://api.airtable.com/v0/appvPiKRd6ZGQKUJA",
     headers: {
@@ -51,34 +42,6 @@ const Contact = ({ table }) => {
       // "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
   });
-
-  const runFilter = () => {
-    console.log(`https://example.com/api?${serializedParams}`);
-    instance
-      .get(`/contact?${serializedParams}`)
-      .then(function (response) {
-        // console.log(response);
-        setUsers(response.data.contacts);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  // useEffect(() => {
-  //   console.log(`/contact`);
-  //   setLoading(true);
-  //   instance
-  //     .get(`/contact`)
-  //     .then(function (response) {
-  //       setUsers(response.data.contacts);
-  //       setLoading(false);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   useEffect(() => {
     // console.log(`/contact`);
@@ -99,7 +62,7 @@ const Contact = ({ table }) => {
     instance
       .get(`/tblHbDEIYCS0QvvZk`)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         setUsers(response.data.records);
         setLoading(false);
       })
@@ -129,7 +92,7 @@ const Contact = ({ table }) => {
     instance
       .get(`/tblHbDEIYCS0QvvZk/${e}`)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         setContact({
           id: response.data.id,
           full_name: response.data.fields.full_name,
@@ -186,7 +149,7 @@ const Contact = ({ table }) => {
     instance
       .patch(`/tblHbDEIYCS0QvvZk/${contact.id}`, data)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         refreshData();
         alert("Record Updated Successfully");
         setShow(false);
@@ -211,7 +174,58 @@ const Contact = ({ table }) => {
     setFiled({ ...filed, [e.target.name]: e.target.value });
   };
 
-  const defaultColumns = [
+  const [datasearch, setDatasearch] = useState();
+
+  console.log("radio", datasearch);
+
+  // console.log("newData", JSON.stringify(newData));
+
+  const groupevent = (e) => {
+    setDatasearch(e.target.value);
+  };
+
+  const defaultColumns1 = [
+    {
+      id: "last_name",
+      accessorKey: "last_name",
+      header: "Last Name",
+      cell: ({ row, getValue }) => {
+        // console.log(row);
+        return (
+          <div
+          // style={{
+          //   // Since rows are flattened by default,
+          //   // we can use the row.depth property
+          //   // and paddingLeft to visually indicate the depth
+          //   // of the row
+          //   paddingLeft: `${row.depth * 2}rem`,
+          // }}
+          >
+            <>
+              {row.getCanExpand() ? (
+                <button
+                  {...{
+                    onClick: row.getToggleExpandedHandler(),
+                    style: {
+                      cursor: "pointer",
+                      backgroundColor: "#0052cc",
+                      border: "none",
+                      color: "#fff",
+                      padding: "4px 10px",
+                    },
+                  }}
+                >
+                  {row.getIsExpanded() ? "👇" : "👉"} {row.original.lastName}
+                </button>
+              ) : (
+                ""
+              )}
+              {getValue()}
+            </>
+          </div>
+        );
+      },
+    },
     {
       accessorKey: "name",
       id: "name",
@@ -228,9 +242,164 @@ const Contact = ({ table }) => {
       header: "First Name",
     },
     {
-      accessorKey: "last_name",
+      accessorKey: "email",
+      id: "email",
+      header: "Email",
+    },
+    {
+      accessorKey: "mobile",
+      id: "mobile",
+      header: "Mobile",
+    },
+    {
+      accessorKey: "Lead_Source",
+      id: "Lead_Source",
+      header: "Lead Source",
+    },
+    {
+      accessorKey: "Referral_Code",
+      id: "Referral_Code",
+      header: "Referral Code",
+    },
+    {
+      accessorKey: "action",
+      id: "action",
+      header: "Action",
+      cell: (value) => {
+        return (
+          <div className="action-report">
+            <Button
+              variant="primary"
+              onClick={() => getIdByButton(value.row.original.id)}
+            >
+              <span>
+                <img src={editbutton} alt="editbutton" />
+              </span>
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
+
+  const defaultColumns2 = [
+    {
+      accessorKey: "first_name",
+      id: "first_name",
+      header: "First Name",
+      cell: ({ row, getValue }) => {
+        // console.log(row);
+        return (
+          <div
+          // style={{
+          //   // Since rows are flattened by default,
+          //   // we can use the row.depth property
+          //   // and paddingLeft to visually indicate the depth
+          //   // of the row
+          //   paddingLeft: `${row.depth * 2}rem`,
+          // }}
+          >
+            <>
+              {row.getCanExpand() ? (
+                <button
+                  {...{
+                    onClick: row.getToggleExpandedHandler(),
+                    style: {
+                      cursor: "pointer",
+                      backgroundColor: "#0052cc",
+                      border: "none",
+                      color: "#fff",
+                      padding: "4px 10px",
+                    },
+                  }}
+                >
+                  {row.getIsExpanded() ? "👇" : "👉"} {row.original.firstName}
+                </button>
+              ) : (
+                ""
+              )}
+              {getValue()}
+            </>
+          </div>
+        );
+      },
+    },
+    {
       id: "last_name",
+      accessorKey: "last_name",
       header: "Last Name",
+    },
+    {
+      accessorKey: "name",
+      id: "name",
+      header: "Name",
+    },
+    {
+      accessorKey: "full_name",
+      id: "full_name",
+      header: "Full Name",
+    },
+    {
+      accessorKey: "email",
+      id: "email",
+      header: "Email",
+    },
+    {
+      accessorKey: "mobile",
+      id: "mobile",
+      header: "Mobile",
+    },
+    {
+      accessorKey: "Lead_Source",
+      id: "Lead_Source",
+      header: "Lead Source",
+    },
+    {
+      accessorKey: "Referral_Code",
+      id: "Referral_Code",
+      header: "Referral Code",
+    },
+    {
+      accessorKey: "action",
+      id: "action",
+      header: "Action",
+      cell: (value) => {
+        return (
+          <div className="action-report">
+            <Button
+              variant="primary"
+              onClick={() => getIdByButton(value.row.original.id)}
+            >
+              <span>
+                <img src={editbutton} alt="editbutton" />
+              </span>
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
+
+  const defaultColumns = [
+    {
+      accessorKey: "first_name",
+      id: "first_name",
+      header: "First Name",
+    },
+    {
+      id: "last_name",
+      accessorKey: "last_name",
+      header: "Last Name",
+    },
+    {
+      accessorKey: "name",
+      id: "name",
+      header: "Name",
+    },
+    {
+      accessorKey: "full_name",
+      id: "full_name",
+      header: "Full Name",
     },
     {
       accessorKey: "email",
@@ -400,21 +569,81 @@ const Contact = ({ table }) => {
   const [colRefatch, setColRefatch] = useState(false);
 
   // console.log("colData", colData);
-  useEffect(() => {
-    if (colRefatch === true) {
-      setColRefatch(false);
-    } else {
-      setColRefatch(true);
-    }
-  }, [colData, colRefatch]);
 
-  const [datasearch, setDatasearch] = useState();
+  function groupByLastName(data) {
+    // Create an object to store the grouped data
+    const groupedData = {};
 
-  const groupevent = (e) => {
-    setDatasearch(e.target.value);
-    console.log("hnhjdswndjh",datasearch);
+    // Iterate over the data array
+    data.forEach((obj) => {
+      // Get the last name from the current object
+      const lastName = obj.last_name;
+
+      // If the last name already exists in the grouped data, add the object to its subRows
+      if (groupedData.hasOwnProperty(lastName)) {
+        groupedData[lastName].subRows.push(obj);
+      }
+      // Otherwise, create a new entry in the grouped data with the last name and initialize its subRows with the current object
+      else {
+        groupedData[lastName] = {
+          lastName: lastName,
+          subRows: [obj],
+        };
+      }
+    });
+
+    // Convert the grouped data object into an array of grouped objects
+    const groupedArray = Object.values(groupedData);
+
+    // Return the grouped array
+    return groupedArray;
   }
 
+  const groupByLast = groupByLastName(newData);
+
+  function groupByFirstName(data) {
+    // Create an object to store the grouped data
+    const groupedData = {};
+
+    // Iterate over the data array
+    data.forEach((obj) => {
+      // Get the last name from the current object
+      const firstName = obj.first_name;
+
+      // If the last name already exists in the grouped data, add the object to its subRows
+      if (groupedData.hasOwnProperty(firstName)) {
+        groupedData[firstName].subRows.push(obj);
+      }
+      // Otherwise, create a new entry in the grouped data with the last name and initialize its subRows with the current object
+      else {
+        groupedData[firstName] = {
+          firstName: firstName,
+          subRows: [obj],
+        };
+      }
+    });
+
+    // Convert the grouped data object into an array of grouped objects
+    const groupedArray = Object.values(groupedData);
+
+    // Return the grouped array
+    return groupedArray;
+  }
+
+  const groupByFirst = groupByFirstName(newData);
+
+  // console.log(groupByFirst);
+
+  // console.log(newCol);
+  // console.log(newGroupData);
+
+  // useEffect(() => {
+  //   if (colRefatch === true) {
+  //     setColRefatch(false);
+  //   } else {
+  //     setColRefatch(true);
+  //   }
+  // }, [colData, colRefatch]);
 
   return (
     <>
@@ -578,43 +807,93 @@ const Contact = ({ table }) => {
                   <div className="ProjectFilter">
                     <form>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent} name="groupby" value="Last Name" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Last Name"
+                        />
                         <p>Last Name</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent} name="groupby" value="Contact ID" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Contact ID"
+                        />
                         <p>Contact ID</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent} name="groupby" value="Deleted" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Deleted"
+                        />
                         <p>Deleted</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent} name="groupby" value="Master Record ID" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Master Record ID"
+                        />
                         <p>Master Record ID</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent} name="groupby" value="Account ID" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Account ID"
+                        />
                         <p>Account ID</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent} name="groupby" value="First Name" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="First Name"
+                        />
                         <p>First Name</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent}  name="groupby" value="Solutation" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Solutation"
+                        />
                         <p>Solutation</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent} name="groupby" value="Full Name" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Full Name"
+                        />
                         <p>Full Name</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent} name="groupby" value="Other Street" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Other Street"
+                        />
                         <p>Other Street</p>
                       </div>
                       <div className="projectfiltercheckbox">
-                        <input type="radio" onChange={groupevent}  name="groupby" value="Other" />
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Other"
+                        />
                         <p>Other</p>
                       </div>
                     </form>
@@ -628,22 +907,50 @@ const Contact = ({ table }) => {
                 </div>
               </Tab>
             </Tabs>
-            
           </div>
           <div className="col-9 right-sidebar">
-          <TableDemo/>
             {loading ? (
               <div>Loading...</div>
             ) : (
               <>
-                <TanTable
+                {/* <TanTable
                   tableData={
-                    filteredRecords.length > 0 ? filteredRecords : newData
+                    filteredRecords.length > 0 ? filteredRecords : groupByLast
                   }
-                  tableColumn={defaultColumns}
+                  tableColumn={defaultColumns1}
                   tableCol={(e) => setColData(e)}
                   reftechCol={colRefatch}
-                />
+                /> */}
+                {datasearch === "Last Name" ? (
+                  <TanTable
+                    tableData={
+                      filteredRecords.length > 0 ? filteredRecords : groupByLast
+                    }
+                    tableColumn={defaultColumns1}
+                    tableCol={(e) => setColData(e)}
+                    reftechCol={colRefatch}
+                  />
+                ) : datasearch === "First Name" ? (
+                  <TanTable
+                    tableData={
+                      filteredRecords.length > 0
+                        ? filteredRecords
+                        : groupByFirst
+                    }
+                    tableColumn={defaultColumns2}
+                    tableCol={(e) => setColData(e)}
+                    reftechCol={colRefatch}
+                  />
+                ) : (
+                  <TanTable
+                    tableData={
+                      filteredRecords.length > 0 ? filteredRecords : newData
+                    }
+                    tableColumn={defaultColumns}
+                    tableCol={(e) => setColData(e)}
+                    reftechCol={colRefatch}
+                  />
+                )}
               </>
             )}
           </div>
