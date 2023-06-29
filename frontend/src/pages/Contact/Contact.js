@@ -21,7 +21,7 @@ const Contact = ({ table }) => {
   const [loading, setLoading] = useState(false);
   // const authHeader = useAuthHeader();
 
-  const [FilterData, setFilterData] = useState(["unassigned"]);
+  // const [FilterData, setFilterData] = useState(["unassigned"]);
 
   const [show, setShow] = useState(false);
 
@@ -174,15 +174,282 @@ const Contact = ({ table }) => {
     setFiled({ ...filed, [e.target.name]: e.target.value });
   };
 
-  const [datasearch, setDatasearch] = useState();
-
-  console.log("radio", datasearch);
-
+  
+  
   // console.log("newData", JSON.stringify(newData));
-
+  const [datasearch, setDatasearch] = useState("");
+  
   const groupevent = (e) => {
     setDatasearch(e.target.value);
   };
+
+  console.log("radio", datasearch);
+
+  //   () => [
+  //     {
+  //       id: "last_name",
+  //       accessorKey: "last_name",
+  //       header: "Last Name",
+  //       cell: ({ row, getValue }) => {
+  //         // console.log(row);
+  //         return (
+  //           <div
+  //           // style={{
+  //           //   // Since rows are flattened by default,
+  //           //   // we can use the row.depth property
+  //           //   // and paddingLeft to visually indicate the depth
+  //           //   // of the row
+  //           //   paddingLeft: `${row.depth * 2}rem`,
+  //           // }}
+  //           >
+  //             <>
+  //               {row.getCanExpand() ? (
+  //                 <button
+  //                   {...{
+  //                     onClick: row.getToggleExpandedHandler(),
+  //                     style: {
+  //                       cursor: "pointer",
+  //                       backgroundColor: "#0052cc",
+  //                       border: "none",
+  //                       color: "#fff",
+  //                       padding: "4px 10px",
+  //                     },
+  //                   }}
+  //                 >
+  //                   {row.getIsExpanded() ? "👇" : "👉"} {row.original.lastName}
+  //                 </button>
+  //               ) : (
+  //                 ""
+  //               )}
+  //               {getValue()}
+  //             </>
+  //           </div>
+  //         );
+  //       },
+  //     },
+  //     {
+  //       accessorKey: "name",
+  //       id: "name",
+  //       header: "Name",
+  //     },
+  //     {
+  //       accessorKey: "full_name",
+  //       id: "full_name",
+  //       header: "Full Name",
+  //     },
+  //     {
+  //       accessorKey: "first_name",
+  //       id: "first_name",
+  //       header: "First Name",
+  //     },
+  //     {
+  //       accessorKey: "email",
+  //       id: "email",
+  //       header: "Email",
+  //     },
+  //     {
+  //       accessorKey: "mobile",
+  //       id: "mobile",
+  //       header: "Mobile",
+  //     },
+  //     {
+  //       accessorKey: "Lead_Source",
+  //       id: "Lead_Source",
+  //       header: "Lead Source",
+  //     },
+  //     {
+  //       accessorKey: "Referral_Code",
+  //       id: "Referral_Code",
+  //       header: "Referral Code",
+  //     },
+  //     {
+  //       accessorKey: "action",
+  //       id: "action",
+  //       header: "Action",
+  //       cell: (value) => {
+  //         return (
+  //           <div className="action-report">
+  //             <Button
+  //               variant="primary"
+  //               onClick={() => getIdByButton(value.row.original.id)}
+  //             >
+  //               <span>
+  //                 <img src={editbutton} alt="editbutton" />
+  //               </span>
+  //             </Button>
+  //           </div>
+  //         );
+  //       },
+  //     },
+  //   ],
+  //   []
+  // );
+
+  // const defaultColumns2 = React.useMemo(
+  //   () => [
+  //     {
+  //       accessorKey: "first_name",
+  //       id: "first_name",
+  //       header: "First Name",
+  //       cell: ({ row, getValue }) => {
+  //         // console.log(row);
+  //         return (
+  //           <div
+  //           // style={{
+  //           //   // Since rows are flattened by default,
+  //           //   // we can use the row.depth property
+  //           //   // and paddingLeft to visually indicate the depth
+  //           //   // of the row
+  //           //   paddingLeft: `${row.depth * 2}rem`,
+  //           // }}
+  //           >
+  //             <>
+  //               {row.getCanExpand() ? (
+  //                 <button
+  //                   {...{
+  //                     onClick: row.getToggleExpandedHandler(),
+  //                     style: {
+  //                       cursor: "pointer",
+  //                       backgroundColor: "#0052cc",
+  //                       border: "none",
+  //                       color: "#fff",
+  //                       padding: "4px 10px",
+  //                     },
+  //                   }}
+  //                 >
+  //                   {row.getIsExpanded() ? "👇" : "👉"} {row.original.firstName}
+  //                 </button>
+  //               ) : (
+  //                 ""
+  //               )}
+  //               {getValue()}
+  //             </>
+  //           </div>
+  //         );
+  //       },
+  //     },
+  //     {
+  //       id: "last_name",
+  //       accessorKey: "last_name",
+  //       header: "Last Name",
+  //     },
+  //     {
+  //       accessorKey: "name",
+  //       id: "name",
+  //       header: "Name",
+  //     },
+  //     {
+  //       accessorKey: "full_name",
+  //       id: "full_name",
+  //       header: "Full Name",
+  //     },
+  //     {
+  //       accessorKey: "email",
+  //       id: "email",
+  //       header: "Email",
+  //     },
+  //     {
+  //       accessorKey: "mobile",
+  //       id: "mobile",
+  //       header: "Mobile",
+  //     },
+  //     {
+  //       accessorKey: "Lead_Source",
+  //       id: "Lead_Source",
+  //       header: "Lead Source",
+  //     },
+  //     {
+  //       accessorKey: "Referral_Code",
+  //       id: "Referral_Code",
+  //       header: "Referral Code",
+  //     },
+  //     {
+  //       accessorKey: "action",
+  //       id: "action",
+  //       header: "Action",
+  //       cell: (value) => {
+  //         return (
+  //           <div className="action-report">
+  //             <Button
+  //               variant="primary"
+  //               onClick={() => getIdByButton(value.row.original.id)}
+  //             >
+  //               <span>
+  //                 <img src={editbutton} alt="editbutton" />
+  //               </span>
+  //             </Button>
+  //           </div>
+  //         );
+  //       },
+  //     },
+  //   ],
+  //   []
+  // );
+
+  // const defaultColumns = React.useMemo(
+  //   () => [
+  //     {
+  //       accessorKey: "first_name",
+  //       id: "first_name",
+  //       header: "First Name",
+  //     },
+  //     {
+  //       id: "last_name",
+  //       accessorKey: "last_name",
+  //       header: "Last Name",
+  //     },
+  //     {
+  //       accessorKey: "name",
+  //       id: "name",
+  //       header: "Name",
+  //     },
+  //     {
+  //       accessorKey: "full_name",
+  //       id: "full_name",
+  //       header: "Full Name",
+  //     },
+  //     {
+  //       accessorKey: "email",
+  //       id: "email",
+  //       header: "Email",
+  //     },
+  //     {
+  //       accessorKey: "mobile",
+  //       id: "mobile",
+  //       header: "Mobile",
+  //     },
+  //     {
+  //       accessorKey: "Lead_Source",
+  //       id: "Lead_Source",
+  //       header: "Lead Source",
+  //     },
+  //     {
+  //       accessorKey: "Referral_Code",
+  //       id: "Referral_Code",
+  //       header: "Referral Code",
+  //     },
+  //     {
+  //       accessorKey: "action",
+  //       id: "action",
+  //       header: "Action",
+  //       cell: (value) => {
+  //         return (
+  //           <div className="action-report">
+  //             <Button
+  //               variant="primary"
+  //               onClick={() => getIdByButton(value.row.original.id)}
+  //             >
+  //               <span>
+  //                 <img src={editbutton} alt="editbutton" />
+  //               </span>
+  //             </Button>
+  //           </div>
+  //         );
+  //       },
+  //     },
+  //   ],
+  //   []
+  // );
 
   const defaultColumns1 = [
     {
@@ -568,7 +835,7 @@ const Contact = ({ table }) => {
   const [colData, setColData] = useState("");
   const [colRefatch, setColRefatch] = useState(false);
 
-  // console.log("colData", colData);
+  console.log("colData", newData);
 
   function groupByLastName(data) {
     // Create an object to store the grouped data
@@ -913,14 +1180,6 @@ const Contact = ({ table }) => {
               <div>Loading...</div>
             ) : (
               <>
-                {/* <TanTable
-                  tableData={
-                    filteredRecords.length > 0 ? filteredRecords : groupByLast
-                  }
-                  tableColumn={defaultColumns1}
-                  tableCol={(e) => setColData(e)}
-                  reftechCol={colRefatch}
-                /> */}
                 {datasearch === "Last Name" ? (
                   <TanTable
                     tableData={

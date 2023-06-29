@@ -90,10 +90,9 @@ const DraggableColumnHeader = ({ header, table }) => {
 
 const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
   const [data, setData] = useState(tableData);
-  const [columns] = useState(() => [...tableColumn]);
+  const [columns, setColumns] = useState(tableColumn);
   const [sorting, setSorting] = useState([]);
 
-  // const rerender = useReducer(() => ({}), {})[1]
 
   useEffect(() => {
     setData(tableData);
@@ -103,6 +102,10 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
     //must start out with populated columnOrder so we can splice
     columns.map((column) => column.id)
   );
+
+  useEffect(() => {
+    setColumns(tableColumn);
+  }, [tableColumn]);
 
   const [expanded, setExpanded] = useState({});
 
@@ -140,7 +143,7 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
 
   console.log("inside tabel js data from contact 139", tableColumn);
   console.log("inside tabel js 140", mastHed);
-
+  
   return (
     <>
       {/* <span>{mastHed}</span> */}
