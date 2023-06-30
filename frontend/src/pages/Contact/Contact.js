@@ -11,6 +11,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
 import editbutton from "../../assets/images/contact/editbutton.svg";
 import TanTable from "../../components/Tabel/Tabel";
+import Select from 'react-select'
 import TableColumn from "../../components/Tabel/TableColumn";
 // import TableDemo from "../../components/TableDemo/TableDemo";
 import axios from "axios";
@@ -519,6 +520,11 @@ const Contact = ({ table }) => {
       header: "Mobile",
     },
     {
+      accessorKey: "status",
+      id: "status",
+      header: "Status",
+    },
+    {
       accessorKey: "Lead_Source",
       id: "Lead_Source",
       header: "Lead Source",
@@ -622,6 +628,11 @@ const Contact = ({ table }) => {
       header: "Lead Source",
     },
     {
+      accessorKey: "status",
+      id: "status",
+      header: "Status",
+    },
+    {
       accessorKey: "Referral_Code",
       id: "Referral_Code",
       header: "Referral Code",
@@ -648,6 +659,114 @@ const Contact = ({ table }) => {
   ];
 
   const defaultColumns = [
+    {
+      accessorKey: "first_name",
+      id: "first_name",
+      header: "First Name",
+    },
+    {
+      id: "last_name",
+      accessorKey: "last_name",
+      header: "Last Name",
+    },
+    {
+      accessorKey: "name",
+      id: "name",
+      header: "Name",
+    },
+    {
+      accessorKey: "full_name",
+      id: "full_name",
+      header: "Full Name",
+    },
+    {
+      accessorKey: "email",
+      id: "email",
+      header: "Email",
+    },
+    {
+      accessorKey: "mobile",
+      id: "mobile",
+      header: "Mobile",
+    },
+    {
+      accessorKey: "Lead_Source",
+      id: "Lead_Source",
+      header: "Lead Source",
+    },
+    {
+      accessorKey: "status",
+      id: "status",
+      header: "Status",
+    },
+    {
+      accessorKey: "Referral_Code",
+      id: "Referral_Code",
+      header: "Referral Code",
+    },
+    {
+      accessorKey: "action",
+      id: "action",
+      header: "Action",
+      cell: (value) => {
+        return (
+          <div className="action-report">
+            <Button
+              variant="primary"
+              onClick={() => getIdByButton(value.row.original.id)}
+            >
+              <span>
+                <img src={editbutton} alt="editbutton" />
+              </span>
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
+
+  const defaultColumns3 = [
+    {
+      accessorKey: "status",
+      id: "status",
+      header: "Status",
+      cell: ({ row, getValue }) => {
+        // console.log(row);
+        return (
+          <div
+          // style={{
+          //   // Since rows are flattened by default,
+          //   // we can use the row.depth property
+          //   // and paddingLeft to visually indicate the depth
+          //   // of the row
+          //   paddingLeft: `${row.depth * 2}rem`,
+          // }}
+          >
+            <>
+              {row.getCanExpand() ? (
+                <button
+                  {...{
+                    onClick: row.getToggleExpandedHandler(),
+                    style: {
+                      cursor: "pointer",
+                      backgroundColor: "#0052cc",
+                      border: "none",
+                      color: "#fff",
+                      padding: "4px 10px",
+                    },
+                  }}
+                >
+                  {row.getIsExpanded() ? "👇" : "👉"} {row.original.firstName}
+                </button>
+              ) : (
+                ""
+              )}
+              {getValue()}
+            </>
+          </div>
+        );
+      },
+    },
     {
       accessorKey: "first_name",
       id: "first_name",
@@ -835,7 +954,7 @@ const Contact = ({ table }) => {
   const [colData, setColData] = useState("");
   const [colRefatch, setColRefatch] = useState(false);
 
-  console.log("colData", newData);
+  
 
   function groupByLastName(data) {
     // Create an object to store the grouped data
@@ -899,6 +1018,37 @@ const Contact = ({ table }) => {
 
   const groupByFirst = groupByFirstName(newData);
 
+  function groupByStatus(data) {
+    // Create an object to store the grouped data
+    const groupedData = {};
+
+    // Iterate over the data array
+    data.forEach((obj) => {
+      // Get the last name from the current object
+      const status = obj.status;
+
+      // If the last name already exists in the grouped data, add the object to its subRows
+      if (groupedData.hasOwnProperty(status)) {
+        groupedData[status].subRows.push(obj);
+      }
+      // Otherwise, create a new entry in the grouped data with the last name and initialize its subRows with the current object
+      else {
+        groupedData[status] = {
+          status: status,
+          subRows: [obj],
+        };
+      }
+    });
+
+    // Convert the grouped data object into an array of grouped objects
+    const groupedArray = Object.values(groupedData);
+
+    // Return the grouped array
+    return groupedArray;
+  }
+
+  const groupStatus = groupByStatus(newData);
+
   // console.log(groupByFirst);
 
   // console.log(newCol);
@@ -911,6 +1061,70 @@ const Contact = ({ table }) => {
   //     setColRefatch(true);
   //   }
   // }, [colData, colRefatch]);
+  console.log(newData);
+  
+const options = [
+  {
+    label: "Activated",
+    value: "activated",
+  },
+  {
+    label: "Adopted",
+    value: "adopted",
+  },
+  {
+    label: "Adore",
+    value: "adore",
+  },
+  {
+    label: "Advocate",
+    value: "advocate",
+  },
+  {
+    label: "Closed Lost",
+    value: "closed_lost",
+  },
+  {
+    label: "Closed Won",
+    value: "closed_won",
+  },
+  {
+    label: "Connected",
+    value: "connected",
+  },
+  {
+    label: "Customer",
+    value: "customer",
+  },
+  {
+    label: "Decision Made",
+    value: "decision_made",
+  },
+  {
+    label: "Iinbound Enquiry",
+    value: "inbound_enquiry",
+  },
+  {
+    label: "Lead",
+    value: "lead",
+  },
+  {
+    label: "Meeting Booked",
+    value: "meeting_booked",
+  },
+  {
+    label: "Negotiation",
+    value: "negotiation",
+  },
+  {
+    label: "Qualified",
+    value: "qualified",
+  },
+  {
+    label: "Quote Requested",
+    value: "quote_requested",
+  },
+];
 
   return (
     <>
@@ -1087,11 +1301,31 @@ const Contact = ({ table }) => {
                           type="radio"
                           onChange={groupevent}
                           name="groupby"
+                          value="First Name"
+                        />
+                        <p>First Name</p>
+                      </div>
+                      {/* <div className="projectfiltercheckbox">
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
                           value="Contact ID"
                         />
                         <p>Contact ID</p>
-                      </div>
+                      </div> */}
+                      <p className="filter-title mt-3">Status</p>
+
                       <div className="projectfiltercheckbox">
+                        <input
+                          type="radio"
+                          onChange={groupevent}
+                          name="groupby"
+                          value="Status"
+                        />
+                        <p>Status</p>
+                      </div>
+                      {/* <div className="projectfiltercheckbox">
                         <input
                           type="radio"
                           onChange={groupevent}
@@ -1117,17 +1351,9 @@ const Contact = ({ table }) => {
                           value="Account ID"
                         />
                         <p>Account ID</p>
-                      </div>
-                      <div className="projectfiltercheckbox">
-                        <input
-                          type="radio"
-                          onChange={groupevent}
-                          name="groupby"
-                          value="First Name"
-                        />
-                        <p>First Name</p>
-                      </div>
-                      <div className="projectfiltercheckbox">
+                      </div> */}
+                      
+                      {/* <div className="projectfiltercheckbox">
                         <input
                           type="radio"
                           onChange={groupevent}
@@ -1153,8 +1379,8 @@ const Contact = ({ table }) => {
                           value="Other Street"
                         />
                         <p>Other Street</p>
-                      </div>
-                      <div className="projectfiltercheckbox">
+                      </div> */}
+                      {/* <div className="projectfiltercheckbox">
                         <input
                           type="radio"
                           onChange={groupevent}
@@ -1162,7 +1388,7 @@ const Contact = ({ table }) => {
                           value="Other"
                         />
                         <p>Other</p>
-                      </div>
+                      </div> */}
                     </form>
                   </div>
                 </div>
@@ -1200,7 +1426,19 @@ const Contact = ({ table }) => {
                     tableCol={(e) => setColData(e)}
                     reftechCol={colRefatch}
                   />
-                ) : (
+                ) : datasearch === "Status" ? (
+                  <TanTable
+                    tableData={
+                      filteredRecords.length > 0
+                        ? filteredRecords
+                        : groupStatus
+                    }
+                    tableColumn={defaultColumns3}
+                    tableCol={(e) => setColData(e)}
+                    reftechCol={colRefatch}
+                  />
+                ) :                
+                (
                   <TanTable
                     tableData={
                       filteredRecords.length > 0 ? filteredRecords : newData
@@ -1309,6 +1547,15 @@ const Contact = ({ table }) => {
                 placeholder="Referral Code"
                 autoFocus
               />
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+              <Form.Label>Status</Form.Label> 
+              <Form.Select value={contact.  } onChange={handleInput}>
+                {options.map((option) => (
+                  <option value={option.value}>{option.label}</option>
+                ))}
+              </Form.Select>
             </Form.Group>
           </Form>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
