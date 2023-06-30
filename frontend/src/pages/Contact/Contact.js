@@ -1551,7 +1551,7 @@ const options = [
             
             <Form.Group className="mb-3">
               <Form.Label>Status</Form.Label> 
-              <Form.Select value={contact.  } onChange={handleInput}>
+              <Form.Select value={contact.status} onChange={handleInput}>
                 {options.map((option) => (
                   <option value={option.value}>{option.label}</option>
                 ))}
