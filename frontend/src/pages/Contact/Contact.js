@@ -1,9 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Contact.scss";
 // import Sidebar from "../../components/Sidebar/Sidebar";
 import SidebarTop from "../../components/SidebarTop/SidebarTop";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Button from "react-bootstrap/Button";
@@ -11,7 +13,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
 import editbutton from "../../assets/images/contact/editbutton.svg";
 import TanTable from "../../components/Tabel/Tabel";
-import Select from 'react-select'
+import Select from "react-select";
 import TableColumn from "../../components/Tabel/TableColumn";
 // import TableDemo from "../../components/TableDemo/TableDemo";
 import axios from "axios";
@@ -175,658 +177,417 @@ const Contact = ({ table }) => {
     setFiled({ ...filed, [e.target.name]: e.target.value });
   };
 
-  
-  
   // console.log("newData", JSON.stringify(newData));
   const [datasearch, setDatasearch] = useState("");
-  
+
   const groupevent = (e) => {
     setDatasearch(e.target.value);
   };
 
   console.log("radio", datasearch);
 
-  //   () => [
-  //     {
-  //       id: "last_name",
-  //       accessorKey: "last_name",
-  //       header: "Last Name",
-  //       cell: ({ row, getValue }) => {
-  //         // console.log(row);
-  //         return (
-  //           <div
-  //           // style={{
-  //           //   // Since rows are flattened by default,
-  //           //   // we can use the row.depth property
-  //           //   // and paddingLeft to visually indicate the depth
-  //           //   // of the row
-  //           //   paddingLeft: `${row.depth * 2}rem`,
-  //           // }}
-  //           >
-  //             <>
-  //               {row.getCanExpand() ? (
-  //                 <button
-  //                   {...{
-  //                     onClick: row.getToggleExpandedHandler(),
-  //                     style: {
-  //                       cursor: "pointer",
-  //                       backgroundColor: "#0052cc",
-  //                       border: "none",
-  //                       color: "#fff",
-  //                       padding: "4px 10px",
-  //                     },
-  //                   }}
-  //                 >
-  //                   {row.getIsExpanded() ? "👇" : "👉"} {row.original.lastName}
-  //                 </button>
-  //               ) : (
-  //                 ""
-  //               )}
-  //               {getValue()}
-  //             </>
-  //           </div>
-  //         );
-  //       },
-  //     },
-  //     {
-  //       accessorKey: "name",
-  //       id: "name",
-  //       header: "Name",
-  //     },
-  //     {
-  //       accessorKey: "full_name",
-  //       id: "full_name",
-  //       header: "Full Name",
-  //     },
-  //     {
-  //       accessorKey: "first_name",
-  //       id: "first_name",
-  //       header: "First Name",
-  //     },
-  //     {
-  //       accessorKey: "email",
-  //       id: "email",
-  //       header: "Email",
-  //     },
-  //     {
-  //       accessorKey: "mobile",
-  //       id: "mobile",
-  //       header: "Mobile",
-  //     },
-  //     {
-  //       accessorKey: "Lead_Source",
-  //       id: "Lead_Source",
-  //       header: "Lead Source",
-  //     },
-  //     {
-  //       accessorKey: "Referral_Code",
-  //       id: "Referral_Code",
-  //       header: "Referral Code",
-  //     },
-  //     {
-  //       accessorKey: "action",
-  //       id: "action",
-  //       header: "Action",
-  //       cell: (value) => {
-  //         return (
-  //           <div className="action-report">
-  //             <Button
-  //               variant="primary"
-  //               onClick={() => getIdByButton(value.row.original.id)}
-  //             >
-  //               <span>
-  //                 <img src={editbutton} alt="editbutton" />
-  //               </span>
-  //             </Button>
-  //           </div>
-  //         );
-  //       },
-  //     },
-  //   ],
-  //   []
-  // );
-
-  // const defaultColumns2 = React.useMemo(
-  //   () => [
-  //     {
-  //       accessorKey: "first_name",
-  //       id: "first_name",
-  //       header: "First Name",
-  //       cell: ({ row, getValue }) => {
-  //         // console.log(row);
-  //         return (
-  //           <div
-  //           // style={{
-  //           //   // Since rows are flattened by default,
-  //           //   // we can use the row.depth property
-  //           //   // and paddingLeft to visually indicate the depth
-  //           //   // of the row
-  //           //   paddingLeft: `${row.depth * 2}rem`,
-  //           // }}
-  //           >
-  //             <>
-  //               {row.getCanExpand() ? (
-  //                 <button
-  //                   {...{
-  //                     onClick: row.getToggleExpandedHandler(),
-  //                     style: {
-  //                       cursor: "pointer",
-  //                       backgroundColor: "#0052cc",
-  //                       border: "none",
-  //                       color: "#fff",
-  //                       padding: "4px 10px",
-  //                     },
-  //                   }}
-  //                 >
-  //                   {row.getIsExpanded() ? "👇" : "👉"} {row.original.firstName}
-  //                 </button>
-  //               ) : (
-  //                 ""
-  //               )}
-  //               {getValue()}
-  //             </>
-  //           </div>
-  //         );
-  //       },
-  //     },
-  //     {
-  //       id: "last_name",
-  //       accessorKey: "last_name",
-  //       header: "Last Name",
-  //     },
-  //     {
-  //       accessorKey: "name",
-  //       id: "name",
-  //       header: "Name",
-  //     },
-  //     {
-  //       accessorKey: "full_name",
-  //       id: "full_name",
-  //       header: "Full Name",
-  //     },
-  //     {
-  //       accessorKey: "email",
-  //       id: "email",
-  //       header: "Email",
-  //     },
-  //     {
-  //       accessorKey: "mobile",
-  //       id: "mobile",
-  //       header: "Mobile",
-  //     },
-  //     {
-  //       accessorKey: "Lead_Source",
-  //       id: "Lead_Source",
-  //       header: "Lead Source",
-  //     },
-  //     {
-  //       accessorKey: "Referral_Code",
-  //       id: "Referral_Code",
-  //       header: "Referral Code",
-  //     },
-  //     {
-  //       accessorKey: "action",
-  //       id: "action",
-  //       header: "Action",
-  //       cell: (value) => {
-  //         return (
-  //           <div className="action-report">
-  //             <Button
-  //               variant="primary"
-  //               onClick={() => getIdByButton(value.row.original.id)}
-  //             >
-  //               <span>
-  //                 <img src={editbutton} alt="editbutton" />
-  //               </span>
-  //             </Button>
-  //           </div>
-  //         );
-  //       },
-  //     },
-  //   ],
-  //   []
-  // );
-
-  // const defaultColumns = React.useMemo(
-  //   () => [
-  //     {
-  //       accessorKey: "first_name",
-  //       id: "first_name",
-  //       header: "First Name",
-  //     },
-  //     {
-  //       id: "last_name",
-  //       accessorKey: "last_name",
-  //       header: "Last Name",
-  //     },
-  //     {
-  //       accessorKey: "name",
-  //       id: "name",
-  //       header: "Name",
-  //     },
-  //     {
-  //       accessorKey: "full_name",
-  //       id: "full_name",
-  //       header: "Full Name",
-  //     },
-  //     {
-  //       accessorKey: "email",
-  //       id: "email",
-  //       header: "Email",
-  //     },
-  //     {
-  //       accessorKey: "mobile",
-  //       id: "mobile",
-  //       header: "Mobile",
-  //     },
-  //     {
-  //       accessorKey: "Lead_Source",
-  //       id: "Lead_Source",
-  //       header: "Lead Source",
-  //     },
-  //     {
-  //       accessorKey: "Referral_Code",
-  //       id: "Referral_Code",
-  //       header: "Referral Code",
-  //     },
-  //     {
-  //       accessorKey: "action",
-  //       id: "action",
-  //       header: "Action",
-  //       cell: (value) => {
-  //         return (
-  //           <div className="action-report">
-  //             <Button
-  //               variant="primary"
-  //               onClick={() => getIdByButton(value.row.original.id)}
-  //             >
-  //               <span>
-  //                 <img src={editbutton} alt="editbutton" />
-  //               </span>
-  //             </Button>
-  //           </div>
-  //         );
-  //       },
-  //     },
-  //   ],
-  //   []
-  // );
-
-  const defaultColumns1 = [
-    {
-      id: "last_name",
-      accessorKey: "last_name",
-      header: "Last Name",
-      cell: ({ row, getValue }) => {
-        // console.log(row);
-        return (
-          <div
-          // style={{
-          //   // Since rows are flattened by default,
-          //   // we can use the row.depth property
-          //   // and paddingLeft to visually indicate the depth
-          //   // of the row
-          //   paddingLeft: `${row.depth * 2}rem`,
-          // }}
-          >
-            <>
-              {row.getCanExpand() ? (
-                <button
-                  {...{
-                    onClick: row.getToggleExpandedHandler(),
-                    style: {
-                      cursor: "pointer",
-                      backgroundColor: "#0052cc",
-                      border: "none",
-                      color: "#fff",
-                      padding: "4px 10px",
-                    },
-                  }}
-                >
-                  {row.getIsExpanded() ? "👇" : "👉"} {row.original.lastName}
-                </button>
-              ) : (
-                ""
-              )}
-              {getValue()}
-            </>
-          </div>
-        );
-      },
-    },
-    {
-      accessorKey: "name",
-      id: "name",
-      header: "Name",
-    },
-    {
-      accessorKey: "full_name",
-      id: "full_name",
-      header: "Full Name",
-    },
-    {
-      accessorKey: "first_name",
-      id: "first_name",
-      header: "First Name",
-    },
-    {
-      accessorKey: "email",
-      id: "email",
-      header: "Email",
-    },
-    {
-      accessorKey: "mobile",
-      id: "mobile",
-      header: "Mobile",
-    },
-    {
-      accessorKey: "status",
-      id: "status",
-      header: "Status",
-    },
-    {
-      accessorKey: "Lead_Source",
-      id: "Lead_Source",
-      header: "Lead Source",
-    },
-    {
-      accessorKey: "Referral_Code",
-      id: "Referral_Code",
-      header: "Referral Code",
-    },
-    {
-      accessorKey: "action",
-      id: "action",
-      header: "Action",
-      cell: (value) => {
-        return (
-          <div className="action-report">
-            <Button
-              variant="primary"
-              onClick={() => getIdByButton(value.row.original.id)}
+  const defaultColumns1 = React.useMemo(
+    () => [
+      {
+        id: "last_name",
+        accessorKey: "last_name",
+        header: "Last Name",
+        cell: ({ row, getValue }) => {
+          // console.log(row);
+          return (
+            <div
+            // style={{
+            //   // Since rows are flattened by default,
+            //   // we can use the row.depth property
+            //   // and paddingLeft to visually indicate the depth
+            //   // of the row
+            //   paddingLeft: `${row.depth * 2}rem`,
+            // }}
             >
-              <span>
-                <img src={editbutton} alt="editbutton" />
-              </span>
-            </Button>
-          </div>
-        );
+              <>
+                {row.getCanExpand() ? (
+                  <button
+                    {...{
+                      onClick: row.getToggleExpandedHandler(),
+                      style: {
+                        cursor: "pointer",
+                        backgroundColor: "#0052cc",
+                        border: "none",
+                        color: "#fff",
+                        padding: "4px 10px",
+                      },
+                    }}
+                  >
+                    {row.getIsExpanded() ? (
+                      <FontAwesomeIcon icon={faCaretUp} />
+                    ) : (
+                      <FontAwesomeIcon icon={faCaretDown} />
+                    )}{" "}
+                    {row.original.lastName}
+                  </button>
+                ) : (
+                  ""
+                )}
+                {/* {getValue()} */}
+              </>
+            </div>
+          );
+        },
       },
-    },
-  ];
+      {
+        accessorKey: "name",
+        id: "name",
+        header: "Name",
+      },
+      {
+        accessorKey: "full_name",
+        id: "full_name",
+        header: "Full Name",
+      },
+      {
+        accessorKey: "first_name",
+        id: "first_name",
+        header: "First Name",
+      },
+      {
+        accessorKey: "email",
+        id: "email",
+        header: "Email",
+      },
+      {
+        accessorKey: "mobile",
+        id: "mobile",
+        header: "Mobile",
+      },
+      {
+        accessorKey: "status",
+        id: "status",
+        header: "Status",
+      },
+      {
+        accessorKey: "Lead_Source",
+        id: "Lead_Source",
+        header: "Lead Source",
+      },
+      {
+        accessorKey: "Referral_Code",
+        id: "Referral_Code",
+        header: "Referral Code",
+      },
+      {
+        accessorKey: "action",
+        id: "action",
+        header: "Action",
+        cell: (value) => {
+          return (
+            <div className="action-report">
+              <Button
+                variant="primary"
+                onClick={() => getIdByButton(value.row.original.id)}
+              >
+                <span>
+                  <img src={editbutton} alt="editbutton" />
+                </span>
+              </Button>
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
 
-  const defaultColumns2 = [
-    {
-      accessorKey: "first_name",
-      id: "first_name",
-      header: "First Name",
-      cell: ({ row, getValue }) => {
-        // console.log(row);
-        return (
-          <div
-          // style={{
-          //   // Since rows are flattened by default,
-          //   // we can use the row.depth property
-          //   // and paddingLeft to visually indicate the depth
-          //   // of the row
-          //   paddingLeft: `${row.depth * 2}rem`,
-          // }}
-          >
-            <>
-              {row.getCanExpand() ? (
-                <button
-                  {...{
-                    onClick: row.getToggleExpandedHandler(),
-                    style: {
-                      cursor: "pointer",
-                      backgroundColor: "#0052cc",
-                      border: "none",
-                      color: "#fff",
-                      padding: "4px 10px",
-                    },
-                  }}
-                >
-                  {row.getIsExpanded() ? "👇" : "👉"} {row.original.firstName}
-                </button>
-              ) : (
-                ""
-              )}
-              {getValue()}
-            </>
-          </div>
-        );
-      },
-    },
-    {
-      id: "last_name",
-      accessorKey: "last_name",
-      header: "Last Name",
-    },
-    {
-      accessorKey: "name",
-      id: "name",
-      header: "Name",
-    },
-    {
-      accessorKey: "full_name",
-      id: "full_name",
-      header: "Full Name",
-    },
-    {
-      accessorKey: "email",
-      id: "email",
-      header: "Email",
-    },
-    {
-      accessorKey: "mobile",
-      id: "mobile",
-      header: "Mobile",
-    },
-    {
-      accessorKey: "Lead_Source",
-      id: "Lead_Source",
-      header: "Lead Source",
-    },
-    {
-      accessorKey: "status",
-      id: "status",
-      header: "Status",
-    },
-    {
-      accessorKey: "Referral_Code",
-      id: "Referral_Code",
-      header: "Referral Code",
-    },
-    {
-      accessorKey: "action",
-      id: "action",
-      header: "Action",
-      cell: (value) => {
-        return (
-          <div className="action-report">
-            <Button
-              variant="primary"
-              onClick={() => getIdByButton(value.row.original.id)}
+  const defaultColumns2 = React.useMemo(
+    () => [
+      {
+        accessorKey: "first_name",
+        id: "first_name",
+        header: "First Name",
+        cell: ({ row, getValue }) => {
+          // console.log(row);
+          return (
+            <div
+            // style={{
+            //   // Since rows are flattened by default,
+            //   // we can use the row.depth property
+            //   // and paddingLeft to visually indicate the depth
+            //   // of the row
+            //   paddingLeft: `${row.depth * 2}rem`,
+            // }}
             >
-              <span>
-                <img src={editbutton} alt="editbutton" />
-              </span>
-            </Button>
-          </div>
-        );
+              <>
+                {row.getCanExpand() ? (
+                  <button
+                    {...{
+                      onClick: row.getToggleExpandedHandler(),
+                      style: {
+                        cursor: "pointer",
+                        backgroundColor: "#0052cc",
+                        border: "none",
+                        color: "#fff",
+                        padding: "4px 10px",
+                      },
+                    }}
+                  >
+                    {row.getIsExpanded() ? (
+                      <FontAwesomeIcon icon={faCaretUp} />
+                    ) : (
+                      <FontAwesomeIcon icon={faCaretDown} />
+                    )}{" "}
+                    {row.original.firstName}
+                  </button>
+                ) : (
+                  ""
+                )}
+                {/* {getValue()} */}
+              </>
+            </div>
+          );
+        },
       },
-    },
-  ];
+      {
+        id: "last_name",
+        accessorKey: "last_name",
+        header: "Last Name",
+      },
+      {
+        accessorKey: "name",
+        id: "name",
+        header: "Name",
+      },
+      {
+        accessorKey: "full_name",
+        id: "full_name",
+        header: "Full Name",
+      },
+      {
+        accessorKey: "email",
+        id: "email",
+        header: "Email",
+      },
+      {
+        accessorKey: "mobile",
+        id: "mobile",
+        header: "Mobile",
+      },
+      {
+        accessorKey: "Lead_Source",
+        id: "Lead_Source",
+        header: "Lead Source",
+      },
+      {
+        accessorKey: "status",
+        id: "status",
+        header: "Status",
+      },
+      {
+        accessorKey: "Referral_Code",
+        id: "Referral_Code",
+        header: "Referral Code",
+      },
+      {
+        accessorKey: "action",
+        id: "action",
+        header: "Action",
+        cell: (value) => {
+          return (
+            <div className="action-report">
+              <Button
+                variant="primary"
+                onClick={() => getIdByButton(value.row.original.id)}
+              >
+                <span>
+                  <img src={editbutton} alt="editbutton" />
+                </span>
+              </Button>
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
 
-  const defaultColumns = [
-    {
-      accessorKey: "first_name",
-      id: "first_name",
-      header: "First Name",
-    },
-    {
-      id: "last_name",
-      accessorKey: "last_name",
-      header: "Last Name",
-    },
-    {
-      accessorKey: "name",
-      id: "name",
-      header: "Name",
-    },
-    {
-      accessorKey: "full_name",
-      id: "full_name",
-      header: "Full Name",
-    },
-    {
-      accessorKey: "email",
-      id: "email",
-      header: "Email",
-    },
-    {
-      accessorKey: "mobile",
-      id: "mobile",
-      header: "Mobile",
-    },
-    {
-      accessorKey: "Lead_Source",
-      id: "Lead_Source",
-      header: "Lead Source",
-    },
-    {
-      accessorKey: "status",
-      id: "status",
-      header: "Status",
-    },
-    {
-      accessorKey: "Referral_Code",
-      id: "Referral_Code",
-      header: "Referral Code",
-    },
-    {
-      accessorKey: "action",
-      id: "action",
-      header: "Action",
-      cell: (value) => {
-        return (
-          <div className="action-report">
-            <Button
-              variant="primary"
-              onClick={() => getIdByButton(value.row.original.id)}
-            >
-              <span>
-                <img src={editbutton} alt="editbutton" />
-              </span>
-            </Button>
-          </div>
-        );
+  const defaultColumns = React.useMemo(
+    () => [
+      {
+        accessorKey: "first_name",
+        id: "first_name",
+        header: "First Name",
       },
-    },
-  ];
+      {
+        id: "last_name",
+        accessorKey: "last_name",
+        header: "Last Name",
+      },
+      {
+        accessorKey: "name",
+        id: "name",
+        header: "Name",
+      },
+      {
+        accessorKey: "full_name",
+        id: "full_name",
+        header: "Full Name",
+      },
+      {
+        accessorKey: "email",
+        id: "email",
+        header: "Email",
+      },
+      {
+        accessorKey: "mobile",
+        id: "mobile",
+        header: "Mobile",
+      },
+      {
+        accessorKey: "Lead_Source",
+        id: "Lead_Source",
+        header: "Lead Source",
+      },
+      {
+        accessorKey: "status",
+        id: "status",
+        header: "Status",
+      },
+      {
+        accessorKey: "Referral_Code",
+        id: "Referral_Code",
+        header: "Referral Code",
+      },
+      {
+        accessorKey: "action",
+        id: "action",
+        header: "Action",
+        cell: (value) => {
+          return (
+            <div className="action-report">
+              <Button
+                variant="primary"
+                onClick={() => getIdByButton(value.row.original.id)}
+              >
+                <span>
+                  <img src={editbutton} alt="editbutton" />
+                </span>
+              </Button>
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
 
-  const defaultColumns3 = [
-    {
-      accessorKey: "status",
-      id: "status",
-      header: "Status",
-      cell: ({ row, getValue }) => {
-        // console.log(row);
-        return (
-          <div
-          // style={{
-          //   // Since rows are flattened by default,
-          //   // we can use the row.depth property
-          //   // and paddingLeft to visually indicate the depth
-          //   // of the row
-          //   paddingLeft: `${row.depth * 2}rem`,
-          // }}
-          >
-            <>
-              {row.getCanExpand() ? (
-                <button
-                  {...{
-                    onClick: row.getToggleExpandedHandler(),
-                    style: {
-                      cursor: "pointer",
-                      backgroundColor: "#0052cc",
-                      border: "none",
-                      color: "#fff",
-                      padding: "4px 10px",
-                    },
-                  }}
-                >
-                  {row.getIsExpanded() ? "👇" : "👉"} {row.original.firstName}
-                </button>
-              ) : (
-                ""
-              )}
-              {getValue()}
-            </>
-          </div>
-        );
-      },
-    },
-    {
-      accessorKey: "first_name",
-      id: "first_name",
-      header: "First Name",
-    },
-    {
-      id: "last_name",
-      accessorKey: "last_name",
-      header: "Last Name",
-    },
-    {
-      accessorKey: "name",
-      id: "name",
-      header: "Name",
-    },
-    {
-      accessorKey: "full_name",
-      id: "full_name",
-      header: "Full Name",
-    },
-    {
-      accessorKey: "email",
-      id: "email",
-      header: "Email",
-    },
-    {
-      accessorKey: "mobile",
-      id: "mobile",
-      header: "Mobile",
-    },
-    {
-      accessorKey: "Lead_Source",
-      id: "Lead_Source",
-      header: "Lead Source",
-    },
-    {
-      accessorKey: "Referral_Code",
-      id: "Referral_Code",
-      header: "Referral Code",
-    },
-    {
-      accessorKey: "action",
-      id: "action",
-      header: "Action",
-      cell: (value) => {
-        return (
-          <div className="action-report">
-            <Button
-              variant="primary"
-              onClick={() => getIdByButton(value.row.original.id)}
+  const defaultColumns3 = React.useMemo(
+    () => [
+      {
+        accessorKey: "status",
+        id: "status",
+        header: "Status",
+        cell: ({ row, getValue }) => {
+          // console.log(row);
+          return (
+            <div
+            // style={{
+            //   // Since rows are flattened by default,
+            //   // we can use the row.depth property
+            //   // and paddingLeft to visually indicate the depth
+            //   // of the row
+            //   paddingLeft: `${row.depth * 2}rem`,
+            // }}
             >
-              <span>
-                <img src={editbutton} alt="editbutton" />
-              </span>
-            </Button>
-          </div>
-        );
+              <>
+                {row.getCanExpand() ? (
+                  <button
+                    {...{
+                      onClick: row.getToggleExpandedHandler(),
+                      style: {
+                        cursor: "pointer",
+                        backgroundColor: "#0052cc",
+                        border: "none",
+                        color: "#fff",
+                        padding: "4px 10px",
+                      },
+                    }}
+                  >
+                    {row.getIsExpanded() ? (
+                      <FontAwesomeIcon icon={faCaretUp} />
+                    ) : (
+                      <FontAwesomeIcon icon={faCaretDown} />
+                    )}{" "}
+                    {row.original.status}
+                  </button>
+                ) : (
+                  ""
+                )}
+                {/* {getValue()} */}
+              </>
+            </div>
+          );
+        },
       },
-    },
-  ];
+      {
+        accessorKey: "first_name",
+        id: "first_name",
+        header: "First Name",
+      },
+      {
+        id: "last_name",
+        accessorKey: "last_name",
+        header: "Last Name",
+      },
+      {
+        accessorKey: "name",
+        id: "name",
+        header: "Name",
+      },
+      {
+        accessorKey: "full_name",
+        id: "full_name",
+        header: "Full Name",
+      },
+      {
+        accessorKey: "email",
+        id: "email",
+        header: "Email",
+      },
+      {
+        accessorKey: "mobile",
+        id: "mobile",
+        header: "Mobile",
+      },
+      {
+        accessorKey: "Lead_Source",
+        id: "Lead_Source",
+        header: "Lead Source",
+      },
+      {
+        accessorKey: "Referral_Code",
+        id: "Referral_Code",
+        header: "Referral Code",
+      },
+      {
+        accessorKey: "action",
+        id: "action",
+        header: "Action",
+        cell: (value) => {
+          return (
+            <div className="action-report">
+              <Button
+                variant="primary"
+                onClick={() => getIdByButton(value.row.original.id)}
+              >
+                <span>
+                  <img src={editbutton} alt="editbutton" />
+                </span>
+              </Button>
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
 
   const saveContact = (e) => {
     if (
@@ -954,8 +715,6 @@ const Contact = ({ table }) => {
   const [colData, setColData] = useState("");
   const [colRefatch, setColRefatch] = useState(false);
 
-  
-
   function groupByLastName(data) {
     // Create an object to store the grouped data
     const groupedData = {};
@@ -1062,69 +821,69 @@ const Contact = ({ table }) => {
   //   }
   // }, [colData, colRefatch]);
   console.log(newData);
-  
-const options = [
-  {
-    label: "Activated",
-    value: "activated",
-  },
-  {
-    label: "Adopted",
-    value: "adopted",
-  },
-  {
-    label: "Adore",
-    value: "adore",
-  },
-  {
-    label: "Advocate",
-    value: "advocate",
-  },
-  {
-    label: "Closed Lost",
-    value: "closed_lost",
-  },
-  {
-    label: "Closed Won",
-    value: "closed_won",
-  },
-  {
-    label: "Connected",
-    value: "connected",
-  },
-  {
-    label: "Customer",
-    value: "customer",
-  },
-  {
-    label: "Decision Made",
-    value: "decision_made",
-  },
-  {
-    label: "Iinbound Enquiry",
-    value: "inbound_enquiry",
-  },
-  {
-    label: "Lead",
-    value: "lead",
-  },
-  {
-    label: "Meeting Booked",
-    value: "meeting_booked",
-  },
-  {
-    label: "Negotiation",
-    value: "negotiation",
-  },
-  {
-    label: "Qualified",
-    value: "qualified",
-  },
-  {
-    label: "Quote Requested",
-    value: "quote_requested",
-  },
-];
+
+  const options = [
+    {
+      label: "Activated",
+      value: "activated",
+    },
+    {
+      label: "Adopted",
+      value: "adopted",
+    },
+    {
+      label: "Adore",
+      value: "adore",
+    },
+    {
+      label: "Advocate",
+      value: "advocate",
+    },
+    {
+      label: "Closed Lost",
+      value: "closed_lost",
+    },
+    {
+      label: "Closed Won",
+      value: "closed_won",
+    },
+    {
+      label: "Connected",
+      value: "connected",
+    },
+    {
+      label: "Customer",
+      value: "customer",
+    },
+    {
+      label: "Decision Made",
+      value: "decision_made",
+    },
+    {
+      label: "Iinbound Enquiry",
+      value: "inbound_enquiry",
+    },
+    {
+      label: "Lead",
+      value: "lead",
+    },
+    {
+      label: "Meeting Booked",
+      value: "meeting_booked",
+    },
+    {
+      label: "Negotiation",
+      value: "negotiation",
+    },
+    {
+      label: "Qualified",
+      value: "qualified",
+    },
+    {
+      label: "Quote Requested",
+      value: "quote_requested",
+    },
+  ];
 
   return (
     <>
@@ -1314,7 +1073,6 @@ const options = [
                         />
                         <p>Contact ID</p>
                       </div> */}
-                      <p className="filter-title mt-3">Status</p>
 
                       <div className="projectfiltercheckbox">
                         <input
@@ -1352,7 +1110,7 @@ const options = [
                         />
                         <p>Account ID</p>
                       </div> */}
-                      
+
                       {/* <div className="projectfiltercheckbox">
                         <input
                           type="radio"
@@ -1429,16 +1187,13 @@ const options = [
                 ) : datasearch === "Status" ? (
                   <TanTable
                     tableData={
-                      filteredRecords.length > 0
-                        ? filteredRecords
-                        : groupStatus
+                      filteredRecords.length > 0 ? filteredRecords : groupStatus
                     }
                     tableColumn={defaultColumns3}
                     tableCol={(e) => setColData(e)}
                     reftechCol={colRefatch}
                   />
-                ) :                
-                (
+                ) : (
                   <TanTable
                     tableData={
                       filteredRecords.length > 0 ? filteredRecords : newData
@@ -1548,9 +1303,9 @@ const options = [
                 autoFocus
               />
             </Form.Group>
-            
+
             <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label> 
+              <Form.Label>Status</Form.Label>
               <Form.Select value={contact.status} onChange={handleInput}>
                 {options.map((option) => (
                   <option value={option.value}>{option.label}</option>

@@ -93,7 +93,6 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
   const [columns, setColumns] = useState(tableColumn);
   const [sorting, setSorting] = useState([]);
 
-
   useEffect(() => {
     setData(tableData);
   }, [tableData]);
@@ -134,23 +133,15 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
     tableCol(table);
   }, [table, tableCol, reftechCol]);
 
-  const [mastHed, setMasthed] = useState([]);
-
-  useEffect(() => {
-    setMasthed(table.getHeaderGroups());
-    console.log("inside tabel.js 138", table.getHeaderGroups());
-  }, [table, tableColumn]);
-
   console.log("inside tabel js data from contact 139", tableColumn);
-  console.log("inside tabel js 140", mastHed);
-  
+  console.log("inside tabel.js 143", table.getHeaderGroups());
+
   return (
     <>
-      {/* <span>{mastHed}</span> */}
       <DndProvider backend={HTML5Backend}>
         <Table className="contact-table">
           <thead>
-            {mastHed.map((headerGroup) => (
+            {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <DraggableColumnHeader
