@@ -91,6 +91,20 @@ const Navigation = () => {
               <Nav.Link as="li" eventKey="chat-with-support">
                 <Link to="/">Chat with Supports</Link>
               </Nav.Link>
+              <NavDropdown
+                title={[
+                  <span key="drop4">
+                    Partners
+                    <FontAwesomeIcon icon={faSortDown} />
+                  </span>,
+                ]}
+                className="nav-dropdown"
+              >
+                <NavDropdown.Item href="/partners" as="a">Partners</NavDropdown.Item>
+                <NavDropdown.Item as="a">Team Members</NavDropdown.Item>
+                <NavDropdown.Item as="a">Prospection</NavDropdown.Item>
+                <NavDropdown.Item as="a">Onboarding</NavDropdown.Item>
+              </NavDropdown>
             </Nav>
             <div className="nav-right-bar">
               <Nav.Link>

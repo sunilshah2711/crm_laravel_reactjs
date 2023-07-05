@@ -10,6 +10,7 @@ import Deals from "./pages/Deals/Deals";
 import Quote from "./pages/Quote/Quote";
 import CreateQuote from "./pages/CreateQuote/CreateQuote";
 import Table from "./pages/Tabel/Tabel";
+import Partners from "./pages/Partners/Partners";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/deal" element={<Deals />} />
         <Route path="/quote" element={<Quote />} />
         <Route path="/createquote" element={<CreateQuote />} />
+        <Route path="/partners" element={<Partners />} />
       </Routes>
     </>
   );
