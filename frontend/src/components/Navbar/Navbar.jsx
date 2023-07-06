@@ -102,7 +102,7 @@ const Navigation = () => {
               >
                 <NavDropdown.Item href="/partners" as="a">Partners</NavDropdown.Item>
                 <NavDropdown.Item as="a">Team Members</NavDropdown.Item>
-                <NavDropdown.Item as="a">Prospection</NavDropdown.Item>
+                <NavDropdown.Item href="/pipline" as="a">Pipline</NavDropdown.Item>
                 <NavDropdown.Item as="a">Onboarding</NavDropdown.Item>
               </NavDropdown>
             </Nav>

@@ -122,17 +122,19 @@
                     }
                 }
             }
-
-            .filter-partners-btn{
-                background-color: $color-blue;
-                .filter-icon{
-                    img{
-                        margin-right: 5px;
-                        width: 15px;
+            .filter-partners-main{
+                
+                .filter-partners-btn{
+                    background-color: $color-blue;
+                    .filter-icon{
+                        img{
+                            margin-right: 5px;
+                            width: 15px;
+                        }
                     }
-                }
-                .filter-text{
-                    font-size: 13px;
+                    .filter-text{
+                        font-size: 13px;
+                    }
                 }
             }
         }
@@ -221,6 +223,65 @@
                     }
                 }
             }
+        }
+    }
+}
+
+.addview-canvas{
+    .offcanvas-body{
+        .shared-btn{
+            .onlyme-btn{
+                background-color: $color-blue;
+                border:none;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                padding: 11px 20px;
+                font-size: 14px;
+            }
+            .team-btn{
+                background-color: $color-gray;
+                color: rgba($color-black,0.5);
+                border:none;
+                padding: 11px 20px;
+                font-size: 14px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+    }
+}
+
+.addpartner-canvas.offcanvas{
+    &.offcanvas{
+        width: 600px;
+    }
+    .offcanvas-body{
+        padding-top: 0;
+        .partner-detail{
+            margin-bottom: 15px;
+            .partner-detail-title{
+                margin-bottom: 5px;
+                font-size: 18px;
+                font-weight: 500;
+            }
+            .partner-detail-desc{
+                font-size: 14px;
+                color: rgba($color-black,0.5);
+            }
+        }
+        .form-label{
+            font-size: 14px;
+            display: block;
+        }
+        .input-partner{
+            font-size: 14px;
+            &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                color: rgba(0, 0, 0, 0.6);
+            }
+        }
+        .access-switch-btn{
+            display: flex;
+            align-items: center;
         }
     }
 }

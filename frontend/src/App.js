@@ -10,6 +10,7 @@ import Deals from "./pages/Deals/Deals";
 import Quote from "./pages/Quote/Quote";
 import CreateQuote from "./pages/CreateQuote/CreateQuote";
 import Table from "./pages/Tabel/Tabel";
+import Kanban from "./pages/Kanban/Kanban";
 import Partners from "./pages/Partners/Partners";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           }
         /> */}
         <Route path="/table" element={<Table />} />
+        <Route path="/pipline" element={<Kanban />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/workplace" element={<Workplace />} />
         <Route path="/report" element={<Report />} />
