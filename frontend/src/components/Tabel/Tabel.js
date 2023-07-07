@@ -100,7 +100,7 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
   const [columnOrder, setColumnOrder] = useState([]);
 
   useEffect(() => {
-    columns.map((column) => column.id);
+    setColumnOrder(columns.map((column) => column.id));
   }, [columns]);
 
   useEffect(() => {
