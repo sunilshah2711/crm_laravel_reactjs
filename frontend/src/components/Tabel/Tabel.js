@@ -97,10 +97,11 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
     setData(tableData);
   }, [tableData]);
 
-  const [columnOrder, setColumnOrder] = useState(
-    //must start out with populated columnOrder so we can splice
-    columns.map((column) => column.id)
-  );
+  const [columnOrder, setColumnOrder] = useState([]);
+
+  useEffect(() => {
+    columns.map((column) => column.id);
+  }, [columns]);
 
   useEffect(() => {
     setColumns(tableColumn);
@@ -133,8 +134,8 @@ const TanTable = ({ tableData, tableColumn, tableCol, reftechCol }) => {
     tableCol(table);
   }, [table, tableCol, reftechCol]);
 
-  console.log("inside tabel js data from contact 139", tableColumn);
-  console.log("inside tabel.js 143", table.getHeaderGroups());
+  // console.log("inside tabel js data from contact 139", tableColumn);
+  // console.log("inside tabel.js 143", table.getHeaderGroups());
 
   return (
     <>
