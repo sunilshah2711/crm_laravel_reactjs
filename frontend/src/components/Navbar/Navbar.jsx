@@ -105,6 +105,23 @@ const Navigation = () => {
                 <NavDropdown.Item href="/pipline" as="a">Pipline</NavDropdown.Item>
                 <NavDropdown.Item as="a">Onboarding</NavDropdown.Item>
               </NavDropdown>
+              <NavDropdown
+                title={[
+                  <span key="drop3">
+                    Laracast
+                    <FontAwesomeIcon icon={faSortDown} />
+                  </span>,
+                ]}
+                className="nav-dropdown"
+              >
+                <NavDropdown.Item as="li">MY LIBRARY</NavDropdown.Item>
+                <NavDropdown.Item as="li">TOPICS</NavDropdown.Item>
+                <NavDropdown.Item as="li">Series</NavDropdown.Item>
+                <NavDropdown.Item as="li">Path</NavDropdown.Item>
+                <NavDropdown.Item as="li">Larabits</NavDropdown.Item>
+                <NavDropdown.Item as="li">Forum</NavDropdown.Item>
+                <NavDropdown.Item as="li">Podcast</NavDropdown.Item>
+              </NavDropdown>
             </Nav>
             <div className="nav-right-bar">
               <Nav.Link>

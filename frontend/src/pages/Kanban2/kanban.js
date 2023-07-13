@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import update from "immutability-helper";
 
 const tasksList = [
   { _id: 1, title: "First Task", status: "backlog" },
@@ -12,7 +13,7 @@ const tasksList = [
   { _id: 7, title: "Seventh Task", status: "review" },
   { _id: 8, title: "Eighth Task", status: "review" },
   { _id: 9, title: "Ninth Task", status: "done" },
-  { _id: 10, title: "Tenth Task", status: "done" },
+  { _id: 10, title: "Tenth Task", status: "done" }
 ];
 
 const channels = ["backlog", "new", "wip", "review", "done"];
@@ -21,7 +22,7 @@ const labelsMap = {
   new: "To Do",
   wip: "In Progress",
   review: "Review",
-  done: "Done",
+  done: "Done"
 };
 
 const classes = {
@@ -29,28 +30,28 @@ const classes = {
     display: "flex",
     margin: "0 auto",
     width: "90vw",
-    fontFamily: 'Arial, "Helvetica Neue", sans-serif',
+    fontFamily: 'Arial, "Helvetica Neue", sans-serif'
   },
   column: {
     minWidth: 200,
     width: "18vw",
     height: "80vh",
     margin: "0 auto",
-    backgroundColor: "#FCC8B2",
+    backgroundColor: "#FCC8B2"
   },
   columnHead: {
     textAlign: "center",
     padding: 10,
     fontSize: "1.2em",
-    backgroundColor: "#C6D8AF",
+    backgroundColor: "#C6D8AF"
   },
   item: {
     padding: 10,
     margin: 10,
     fontSize: "0.8em",
     cursor: "pointer",
-    backgroundColor: "white",
-  },
+    backgroundColor: "white"
+  }
 };
 
 const Kanban = () => {
@@ -58,13 +59,13 @@ const Kanban = () => {
 
   const changeTaskStatus = useCallback(
     (id, status) => {
-      let task = tasks.find((task) => task._id === id);
+      let task = tasks.find(task => task._id === id);
       const taskIndex = tasks.indexOf(task);
       task = { ...task, status };
-    //   let newTasks = update(tasks, {
-    //     [taskIndex]: { $set: task },
-    //   });
-    //   setTaskStatus(newTasks);
+      let newTasks = update(tasks, {
+        [taskIndex]: { $set: task }
+      });
+      setTaskStatus(newTasks);
     },
     [tasks]
   );
@@ -74,7 +75,7 @@ const Kanban = () => {
       <header> Kanban Board </header>
       <DndProvider backend={HTML5Backend}>
         <section style={classes.board}>
-          {channels.map((channel) => (
+          {channels.map(channel => (
             <KanbanColumn
               key={channel}
               status={channel}
@@ -84,8 +85,8 @@ const Kanban = () => {
                 <div style={classes.columnHead}>{labelsMap[channel]}</div>
                 <div>
                   {tasks
-                    .filter((item) => item.status === channel)
-                    .map((item) => (
+                    .filter(item => item.status === channel)
+                    .map(item => (
                       <KanbanItem key={item._id} id={item._id}>
                         <div style={classes.item}>{item.title}</div>
                       </KanbanItem>
@@ -108,7 +109,7 @@ const KanbanColumn = ({ status, changeTaskStatus, children }) => {
     accept: "card",
     drop(item) {
       changeTaskStatus(item.id, status);
-    },
+    }
   });
   drop(ref);
   return <div ref={ref}> {children}</div>;
@@ -116,11 +117,15 @@ const KanbanColumn = ({ status, changeTaskStatus, children }) => {
 
 const KanbanItem = ({ id, children }) => {
   const ref = useRef(null);
+  const ItemTypes = {
+    CARD: 'card',
+  };
+  
   const [{ isDragging }, drag] = useDrag({
-    item: { type: "card", id },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
+    item: { type: ItemTypes.CARD, id },
+    collect: monitor => ({
+      isDragging: monitor.isDragging()
+    })
   });
   const opacity = isDragging ? 0 : 1;
   drag(ref);

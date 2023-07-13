@@ -1,0 +1,169 @@
+@import "../../assets//scss/variables";
+
+
+.laracast-page{
+    .container{
+        padding: 0;
+        max-width: 1200px;
+    }
+    .laracst-hometitle{
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+        .laracst-maintitle{
+            line-height: 50px;
+            font-weight: 600;
+            font-size: 40px;
+            color: $color-black;
+        }
+        .laracst-desc{
+            font-weight: 500;
+            margin-top: 15px;
+            font-size: 15px;
+            color: $color-black;
+        }
+    }
+    .popularbit-block{
+        display: grid;
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 1.5rem;
+        .popularbit-innerblock{
+            background: linear-gradient(to left, #21c8f6 0%,#637bff 100%);
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            &.popularbit-inner2{
+            background: linear-gradient(to left, #ffc73c 0%,#f19a1a 100%);
+            }   
+            &.popularbit-inner3{
+            background: linear-gradient(to left, #f44881 0%,#ec454f 100%);
+            }
+            &.popularbit-inner4{
+            background: linear-gradient(to left, #6edcc4 0%,#1aab8b 100%);                
+            }
+            &.popularbit-inner5{
+            background: linear-gradient(to left, #ffc73c 0%,#f19a1a 100%);                
+            }
+            &.popularbit-inner6{
+            background: linear-gradient(to left, #ffc73c 0%,#f19a1a 100%);                
+            }
+            &:after{
+                position: absolute;
+                content: '';
+                background: rgba(0,0,0,.1);
+                height: 100%;
+                right: 0;
+                top: 0;
+                transform: rotate(-10deg) scale(150%);
+                width: 20%;
+            }
+            .popoularimg{
+                width: 205px;
+                bottom: -1px;
+                z-index: 1;
+                right: 0px;
+                position: absolute;
+            }
+            .popularbit-play{
+                padding: 1.25rem 2rem 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between; 
+                flex: 1 1 0%;
+                .popularbit-content{
+                    padding-right: 30%;
+                    display: flex;
+                    flex-direction: column;
+                    .popularbit-title{
+                        display: flex;
+                        align-items: center;
+                        height: 70px;
+                        a{  
+                            line-height: 1.25;
+                            font-size: 25px;
+                            color: $color-white;
+                            text-decoration: none;
+                            font-weight: 700;
+                        }
+                        &:hover{
+                            a{
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                    .popularbit-desc{
+                        font-size: 13px;
+                        color: $color-white;
+                        margin: 18px 0 20px;
+                    }
+                    .popularbit-feature{
+                        padding: 19px 0;
+                        .popularbit-feature-content{
+                            gap: 1.5rem;
+                            display: flex;
+                        }
+                        .popularbit-item{
+                            font-size: 12px;
+                            .popularbit-item-title{
+                                letter-spacing: -.02em;
+                                color: hsla(0,0%,100%,.75);
+                                font-weight: 500;
+                            }
+                            .popularbit-item-desc{
+                                font-weight: 500;
+                                color:$color-white;
+                            }
+                        }
+                    }
+                    .popularbit-button{
+                        margin-top:19px;
+                        gap: 0.75rem;
+                        display: flex;
+                        flex-wrap: wrap;
+                        .play-button{
+                            flex: 1 1 0%;
+                            a{
+                                background-color: $color-white;
+                                padding: 12px 30px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 16px;
+                                font-size: 12px;
+                                text-decoration: none;
+                                color: $color-black;
+                                font-weight: 500;
+                                svg{
+                                    width: 15px;
+                                    margin-right: 5px;
+                                    height: 15px;
+                                }
+                            }
+                        }
+                        .watchlist-button{
+                            flex: 1 1 0%;
+                            a{
+                                background-color: hsla(0,0%,100%,.15);
+                                padding: 12px 30px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 16px;
+                                font-size: 12px;
+                                text-decoration: none;
+                                color: $color-white;
+                                font-weight: 500;
+                                svg{
+                                    width: 10px;
+                                    fill:$color-white;
+                                    margin-right: 5px;
+                                    height: 10px;
+                                }
+                            }
+                        }
+                    }
+                }   
+            }
+        }
+    }
+}
