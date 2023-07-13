@@ -13,7 +13,6 @@ import Table from "./pages/Tabel/Tabel";
 // import Kanban from "./pages/Kanban/Kanban";
 import Partners from "./pages/Partners/Partners";
 // import Pipline from "./pages/PiplineKanban/PiplineKanban";
-import Kanban from "./pages/Kanban2/kanban";
 import Laracast from "./pages/Laracast/Laracast";
 import Video from "./pages/Laracast/Video";
 
@@ -41,7 +40,6 @@ function App() {
         <Route path="/laracast" element={<Laracast />} />
         <Route path="/video" element={<Video />} />
         <Route path="/table" element={<Table />} />
-        <Route path="/pipline" element={<Kanban />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/workplace" element={<Workplace />} />
         <Route path="/report" element={<Report />} />
