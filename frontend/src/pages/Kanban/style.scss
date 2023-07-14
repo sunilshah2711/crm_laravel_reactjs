@@ -1,0 +1,14 @@
+.kanban {
+  width: calc(100vw - 40px);
+  height: calc(100vh - 40px);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.kanban-col {
+  height: 100%;
+  width: 24%;
+  background-color: rgb(255, 134, 134);
+  border-radius: 10px;
+}
