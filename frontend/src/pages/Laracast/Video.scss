@@ -127,6 +127,11 @@
                     justify-content: center;
                     span{
                         font-size: 15px;
+                        svg{
+                            fill: #212529;
+                            width: 18px;
+                            height: 18px;
+                        }
                     }
                 }
                 .episode-content{
@@ -170,7 +175,7 @@
         width: 84%;
         margin-left: 306px;
         .video-play{
-            background-color: #222;
+            background-color: #000;
             height: 500px;
         }
         .container{
@@ -229,7 +234,9 @@
             display: flex;
             font-weight: 700;
             padding: 1.5rem;
-            background: linear-gradient(to left, #21c8f6 0%,#21c8f6 100%);
+            border-radius: 20px;
+            background: linear-gradient(to left, #21c8f6 0%,#637bff 100%);
+            margin-bottom: 2rem;
             .arrow-vite{
                 flex: none;
                 display: flex;
@@ -301,6 +308,249 @@
                             }
                         }
                     }
+                }
+            }
+            .laracast-button{
+                width: 200px;
+                margin-left: 22.5px;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                .laracast-complete{
+                    align-items: center;
+                    flex: 1 1 0%;   
+                    display: flex;
+                    border-radius: 10px;
+                    width: 100%;
+                    color: $color-white;
+                    justify-content: center;    
+                    background-color: hsla(0,0%,100%,.15);
+                    border: none;
+                    padding: 11.25px 22.5px;
+                    font-size: 12px;
+                    svg{
+                        width: 15px;
+                        height: 15px;
+                        fill: $color-white;
+                        margin-right: 7.5px;
+                    }
+                }
+                .laracast-watchlist{
+                    border-radius: 10px;
+                    border: none;
+                    color: $color-white;
+                    font-size: 12px;
+                    flex-basis: 150px;
+                    background-color: hsla(0,0%,100%,.15);
+                    padding: 11.25px 22.5px;
+                    flex: 1 1 0%;   
+                    svg{
+                        margin-right: 7.5px;
+                        width: 8px;
+                        fill: $color-white;
+                    }
+                }
+            }
+            .arrow-vite-right{
+                svg{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        .teacher-about-block{
+            max-width: 860px;
+            margin: 0 auto;
+            .teacher-about-inner{
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-bottom: 0.75rem;
+                padding-top: 0.75rem;
+                background-color: rgb(24 39 63);
+                display: flex;
+                border-radius: 0.934rem;
+                margin-bottom: 10px;
+                align-items: center;
+                .teacher-about-img{
+                    width: 17%;
+                    height: 149px;
+                    border-radius: 16px;
+                    border:3px solid rgb(33 200 246);
+                    overflow: hidden;
+                    img{
+                        max-width: 100%;
+                    }
+                }
+                .teacher-about-content{
+                    width: 83%;
+                    margin-bottom: 0.5rem;
+                    margin-left: 1.5rem;
+                    margin-top: 0.5rem;
+                    .teacher-about-wrapper{
+                        display: flex;
+                        align-items: start;
+                        justify-content: space-between;
+                        .teacher-about-info{
+                            .teacher-about-title{
+                                color: $color-white;
+                                font-weight: 500;
+                                font-size: 1.7rem;
+                            }
+                            .teacher-about-desc{
+                                color:rgb(186 217 252);
+                                font-size: .8rem;
+                            }
+                        }
+                        .socail-about{
+                            display: flex;
+                            align-items: center;
+                            column-gap: 0.5rem;
+                            .twitter-svg{
+                                align-items: center;
+                                display: flex;
+                                justify-content: center;
+                                background-color: rgb(25 48 78);
+                                border-radius: 0.4rem;
+                                width: 2rem;
+                                height: 2rem;
+                                svg{
+                                    fill:rgb(186 217 252)
+                                }
+                            }
+                            .github-svg{
+                                align-items: center;
+                                display: flex;
+                                justify-content: center;
+                                background-color: rgb(25 48 78);
+                                border-radius: 0.4rem;
+                                width: 2rem;
+                                height: 2rem;
+                                svg{
+                                    fill:rgb(186 217 252)
+                                }
+                            }
+                            .visit-website{
+                                font-weight: 600;
+                                font-size: .6666rem;
+                                padding: 0.5rem 1.25rem;
+                                background-color: rgba(50,138,241,.1);
+                                text-decoration: none;
+                                color: $color-white;
+                                border-radius: 16px;
+                                line-height: 14px;
+                            }
+                        }
+                    }
+                    .greetings-text{
+                        font-weight: 500;
+                        font-size: .867rem;
+                        color: $color-white;
+                        margin-top: 1rem;
+                        max-width: 40rem;
+                    }
+                }
+            }
+            .learnpanel-block{
+                display: grid;
+                grid-template-columns: repeat(6,minmax(0,1fr));
+                gap: 1rem;
+                .learn-wrapper{
+                    grid-column: span 2/span 2;
+                    border-radius:0.934rem;
+                    background-color: rgb(24, 39, 63);
+                    padding: 1.5rem 2rem;
+                    p{
+                        font-weight: 600;
+                        font-size: 1.33333rem;
+                        letter-spacing: .02rem;
+                        margin-bottom: 1.25rem;
+                        line-height: 1;
+                        color: $color-white;
+                    }
+                    ul{
+                        margin: 0;
+                        padding: 0;
+                        li{
+                            list-style: none;
+                            display: flex;
+                            align-items: center;
+                            padding: 0;
+                            margin-bottom: 7.5px;
+                            &:last-child{
+                                margin-bottom: 0;
+                            }
+                            .learn-check{
+                                background: linear-gradient(180deg,#21c8f6,#637bff);
+                                padding: 0.25rem;
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                svg{
+                                    fill: $color-white;
+                                }
+                            }
+                            .learn-setp{
+                                font-weight: 500;
+                                font-size: 13px;
+                                margin-left: 5px;
+                                color: $color-white;
+                            }
+                        }
+                    }
+                }
+                .learnpanel-content{
+                    grid-column: span 4/span 4;
+                    border-radius:0.934rem;
+                    background-color: rgb(24, 39, 63);
+                    padding: 1.5rem 2rem;
+                    .learnpanel-detail{
+                        display: flex;
+                        justify-content: space-between;
+                        .learnpanel-title{
+                            font-size: 1.33333rem;
+                            font-weight: 600;
+                            line-height: 1;
+                            color: $color-white;
+                            margin-bottom: 1.25rem;
+                        }
+                        .learnpanel-date{
+                            font-size: .6666rem;
+                            font-weight: 700;
+                            color: rgb(186 217 252);
+                        }
+                    }
+                    .learnpanel-desc{
+                        color: $color-white;
+                        font-weight: 500;
+                        font-size: .867rem;
+                    }
+                }
+            }
+            .download-block{
+                display: grid;
+                grid-template-columns: repeat(6,minmax(0,1fr));
+                gap: 1rem;
+                margin-top: 10px;
+                .download-info{
+                    grid-column: span 2/span 3;
+                    border-radius:0.934rem;
+                    gap: 1.25rem;
+                    background-color: rgb(24, 39, 63);
+                    padding: 2rem;
+                    display: flex;
+                    align-items: center;
+                    p{
+                        font-weight: 500;
+                        font-size: .867rem;
+                        color: rgb(186 217 252);
+                    }
+                }
+            }
+            .laracastscta{
+                max-width: 370px;
+                margin: 0 auto;
+                margin-top: 2.5rem;
+                img{
+                    max-width: 100%;
                 }
             }
         }
