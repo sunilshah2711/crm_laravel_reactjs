@@ -13,7 +13,6 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
 import editbutton from "../../assets/images/contact/editbutton.svg";
 import TanTable from "../../components/Tabel/Tabel";
-import Select from "react-select";
 import TableColumn from "../../components/Tabel/TableColumn";
 // import TableDemo from "../../components/TableDemo/TableDemo";
 import axios from "axios";

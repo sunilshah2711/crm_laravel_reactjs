@@ -10,9 +10,8 @@ import Deals from "./pages/Deals/Deals";
 import Quote from "./pages/Quote/Quote";
 import CreateQuote from "./pages/CreateQuote/CreateQuote";
 import Table from "./pages/Tabel/Tabel";
-// import Kanban from "./pages/Kanban/Kanban";
+import Kanban from "./pages/Kanban/Kanban";
 import Partners from "./pages/Partners/Partners";
-// import Pipline from "./pages/PiplineKanban/PiplineKanban";
 import Laracast from "./pages/Laracast/Laracast";
 import Video from "./pages/Laracast/Video";
 
@@ -49,6 +48,7 @@ function App() {
         <Route path="/quote" element={<Quote />} />
         <Route path="/createquote" element={<CreateQuote />} />
         <Route path="/partners" element={<Partners />} />
+        <Route path="/kanban" element={<Kanban />} />
       </Routes>
     </>
   );
