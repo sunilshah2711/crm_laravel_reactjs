@@ -1,4 +1,4 @@
-# This is an wordpress theme project.
+# This is an CRM project.
 In this CRM project, we built the backend in Laravel and the frontend in ReactJS.
 
 ## In the Backend
